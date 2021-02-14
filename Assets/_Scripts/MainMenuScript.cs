@@ -30,8 +30,4 @@ public class MainMenuScript : MonoBehaviour
     {
         SceneManager.LoadScene(0);
     }
-    public void UnPause()
-    {
-        Cursor.lockState = CursorLockMode.Locked;
-    }
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
     public GameObject pauseMenu;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,7 +20,13 @@ public class GameController : MonoBehaviour
         {
             pauseMenu.SetActive(true);
             Cursor.lockState = CursorLockMode.None;
+            Time.timeScale = 0f;
         }
     }
 
+    public void UnPauseGC()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Time.timeScale = 1f;
+    }
 }
