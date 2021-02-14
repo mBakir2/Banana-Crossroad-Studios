@@ -27,10 +27,12 @@ public class VolumeChange : MonoBehaviour
     public void LevelOff()
     {
         mixer.SetFloat("MasterVol", -80f);
+        GameData.sound = false;
     }
 
     public void LevelOn()
     {
         mixer.SetFloat("MasterVol", -6f);
+        GameData.sound = true;
     }
 }
