@@ -23,7 +23,6 @@ public class PlayerBehaviour : MonoBehaviour
 
     public Vector3 velocity;
     public bool isGrounded;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -55,6 +54,7 @@ public class PlayerBehaviour : MonoBehaviour
         velocity.y += gravity * Time.deltaTime;
 
         controller.Move(velocity * Time.deltaTime);
+
     }
 
     void OnDrawGizmos()
