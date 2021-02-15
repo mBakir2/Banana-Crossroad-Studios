@@ -5,10 +5,18 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuScript : MonoBehaviour
 {
+    public GameObject soundOnButt;
+    public GameObject soundOffButt;
+    public GameObject volumeSlider;
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (GameData.sound == false)
+        {
+            soundOnButt.SetActive(false);
+            volumeSlider.SetActive(false);
+            soundOffButt.SetActive(true);
+        }
     }
 
     // Update is called once per frame
