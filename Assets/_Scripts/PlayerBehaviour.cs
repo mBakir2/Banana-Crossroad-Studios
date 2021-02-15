@@ -5,7 +5,7 @@ using UnityEngine;
  * Authors: Anmoldeep Singh Gill
  *          Chadwick Lapis
  *          Mohammad Bakir
- * Last Modified on: 12th Feb 2020
+ * Last Modified on: 14th Feb 2020
  */
 
 public class PlayerBehaviour : MonoBehaviour
@@ -47,7 +47,30 @@ public class PlayerBehaviour : MonoBehaviour
 
         controller.Move(move * maxSpeed * Time.deltaTime);
 
-        if (Input.GetButton("Jump") && isGrounded)
+        /*
+        if (Input.GetKeyDown(GameData.wKey))
+        {
+            Vector3 move = transform.right * 1f; //+ transform.forward * z;
+            controller.Move(move * maxSpeed * Time.deltaTime);
+        }
+        if (Input.GetKeyDown(GameData.sKey))
+        {
+            Vector3 move = transform.right * -1f;  //+ transform.forward * z;
+            controller.Move(move * maxSpeed * Time.deltaTime);
+        }
+        if (Input.GetKeyDown(GameData.aKey))
+        {
+            Vector3 move = transform.forward * 1f;  //+ transform.right * z;
+            controller.Move(move * maxSpeed * Time.deltaTime);
+        }
+        if (Input.GetKeyDown(GameData.dKey))
+        {
+            Vector3 move = transform.forward * -1f;  //+ transform.forward * z;
+            controller.Move(move * maxSpeed * Time.deltaTime);
+        }
+        */
+
+        if (Input.GetKeyDown(GameData.jumpKey) && isGrounded)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2.0f * gravity);
         }
