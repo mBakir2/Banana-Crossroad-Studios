@@ -1,6 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+/**
+ * Authors: Anmoldeep Singh Gill
+ *          Chadwick Lapis
+ *          Mohammad Bakir
+ * Last Modified on: 14th Feb 2020
+ */
 
 public class GameController : MonoBehaviour
 {
