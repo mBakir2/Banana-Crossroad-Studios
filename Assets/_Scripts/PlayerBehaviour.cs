@@ -50,9 +50,10 @@ public class PlayerBehaviour : MonoBehaviour
 
         if (inputManager.GetButtonDown("Jump") && isGrounded)
         {
-            Vector3 move = transform.right * 1f; //+ transform.forward * z;
+            move = transform.right * 1f; //+ transform.forward * z;
             controller.Move(move * maxSpeed * Time.deltaTime);
         }
+        /*
         if (Input.GetKeyDown(GameData.sKey))
         {
             Vector3 move = transform.right * -1f;  //+ transform.forward * z;
