@@ -16,6 +16,7 @@ public class PlayerBehaviour : MonoBehaviour
     public float maxSpeed = 10.0f;
     public float gravity = -30f;
     public float jumpHeight = 3.0f;
+    private InputManager inputManager;
 
     public Transform groundCheck;
     public float groundRadius = 0.5f;
@@ -27,6 +28,7 @@ public class PlayerBehaviour : MonoBehaviour
     void Start()
     {
         controller = GetComponent<CharacterController>();
+        inputManager = GameObject.FindObjectOfType<InputManager>();
     }
 
     // Update is called once per frame
@@ -46,7 +48,7 @@ public class PlayerBehaviour : MonoBehaviour
 
         controller.Move(move * maxSpeed * Time.deltaTime);
 
-        if (Input.GetButton("Jump") && isGrounded)
+        if (inputManager.GetButtonDown("Jump") && isGrounded)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2.0f * gravity);
         }
