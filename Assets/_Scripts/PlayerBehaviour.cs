@@ -16,6 +16,7 @@ public class PlayerBehaviour : MonoBehaviour
     public float maxSpeed = 10.0f;
     public float gravity = -30f;
     public float jumpHeight = 3.0f;
+    private InputManager inputManager;
 
     public Transform groundCheck;
     public float groundRadius = 0.5f;
@@ -27,7 +28,7 @@ public class PlayerBehaviour : MonoBehaviour
     void Start()
     {
         controller = GetComponent<CharacterController>();
-
+        inputManager = GameObject.FindObjectOfType<InputManager>();
     }
 
     // Update is called once per frame
@@ -47,12 +48,12 @@ public class PlayerBehaviour : MonoBehaviour
 
         controller.Move(move * maxSpeed * Time.deltaTime);
 
-        /*
-        if (Input.GetKeyDown(GameData.wKey))
+        if (inputManager.GetButtonDown("Jump") && isGrounded)
         {
-            Vector3 move = transform.right * 1f; //+ transform.forward * z;
+            move = transform.right * 1f; //+ transform.forward * z;
             controller.Move(move * maxSpeed * Time.deltaTime);
         }
+        /*
         if (Input.GetKeyDown(GameData.sKey))
         {
             Vector3 move = transform.right * -1f;  //+ transform.forward * z;
