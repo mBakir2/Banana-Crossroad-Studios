@@ -627,6 +627,10 @@ MonoBehaviour:
   soundOnButt: {fileID: 291512289}
   soundOffButt: {fileID: 745964088}
   volumeSlider: {fileID: 633255466}
+  winText: {fileID: 0}
+  winSound: {fileID: 0}
+  loseText: {fileID: 0}
+  loseSound: {fileID: 0}
 --- !u!1 &268762027
 GameObject:
   m_ObjectHideFlags: 0
