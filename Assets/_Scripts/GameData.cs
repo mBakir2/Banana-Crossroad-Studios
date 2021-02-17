@@ -12,6 +12,7 @@ public static class GameData
     public static bool sound { get; set; } = true;
     public static bool win { get; set; } = false;
     public static int goals { get; set; } = 0;
+    public static int totalgoals { get; set; } = 5;
     public static KeyCode forwardKey { get; set; } = KeyCode.W;
     public static KeyCode leftKey { get; set; } = KeyCode.A;
     public static KeyCode backKey { get; set; } = KeyCode.S;

@@ -5,7 +5,7 @@ using UnityEngine;
  * Authors: Anmoldeep Singh Gill
  *          Chadwick Lapis
  *          Mohammad Bakir
- * Last Modified on: 14th Feb 2020
+ * Last Modified on: 16th Feb 2020
  */
 public class AnimatorScript : MonoBehaviour
 {
