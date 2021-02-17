@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DestroyObject : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class DestroyObject : MonoBehaviour
         if(collision.gameObject.CompareTag("Player"))
         {
             Destroy(collision.gameObject);
+            SceneManager.LoadScene(2);
         }
     }
 }
