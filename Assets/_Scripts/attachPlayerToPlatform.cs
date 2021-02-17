@@ -29,8 +29,8 @@ public class attachPlayerToPlatform : MonoBehaviour
     {
         if (other.gameObject == Player)
         {
-            Debug.Log("Player Atached");
             Player.transform.parent = transform;
+            Player.GetComponent<Rigidbody>().isKinematic = true;
         }
     }
 
