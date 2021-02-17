@@ -31,7 +31,7 @@ public class GameController : MonoBehaviour
             Time.timeScale = 0f;
         }
 
-        if (GameData.goals == 2)
+        if (GameData.goals == 5)
         {
             GameData.win = true;
             SceneManager.LoadScene(2);
