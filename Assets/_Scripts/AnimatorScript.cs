@@ -13,8 +13,6 @@ public class AnimatorScript : MonoBehaviour
     public Transform groundCheck;
     public float groundRadius = 0.5f;
     public LayerMask groundMask;
-
-    public Vector3 velocity;
     public bool isGrounded;
 
     public Animator animator;
@@ -27,35 +25,37 @@ public class AnimatorScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
+        if (Input.GetKey(GameData.rightKey) && isGrounded)
         {
             animator.SetBool("Stopped", false);
         }
-
-        if (Input.GetAxis("Horizontal") == 0 || Input.GetAxis("Vertical") == 0)
+        else if (Input.GetKey(GameData.leftKey) && isGrounded)
         {
-            animator.SetBool("Stopped", true);
+            animator.SetBool("Stopped", false);
         }
-
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundRadius, groundMask);
-
-        if (isGrounded && velocity.y < 0)
+        else if (Input.GetKey(GameData.forwardKey) && isGrounded)
         {
-            animator.SetBool("isGrounded", true);
+            animator.SetBool("Stopped", false);
         }
-
-        if (Input.GetButton("Jump") && isGrounded)
+        else if (Input.GetKey(GameData.backKey) && isGrounded)
         {
-            animator.SetBool("isGrounded", false);
-        }
-
-        if (velocity.y == 0 && velocity.x == 0 && velocity.z == 0)
-        {
-            animator.SetBool("Stopped", true);
+            animator.SetBool("Stopped", false);
         }
         else
         {
-            animator.SetBool("Stopped", false);
+            animator.SetBool("Stopped", true);
+        }
+
+
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundRadius, groundMask);
+
+        if (isGrounded)
+        {
+            animator.SetBool("isGrounded", true);
+        }
+        else
+        {
+            animator.SetBool("isGrounded", false);
         }
 
         //animator.SetFloat("Speed", velocity.magnitude);
