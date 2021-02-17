@@ -7,7 +7,6 @@ using UnityEngine;
  *          Mohammad Bakir
  * Last Modified on: 16th Feb 2020
  */
-
 public class PlayerBehaviour : MonoBehaviour
 {
 
