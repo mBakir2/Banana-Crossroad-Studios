@@ -9,6 +9,7 @@ using UnityEngine;
  */
 public static class GameData
 {
+    // stores the current values of all the keybindings and other options settings
     public static bool sound { get; set; } = true;
     public static bool win { get; set; } = false;
     public static int goals { get; set; } = 0;

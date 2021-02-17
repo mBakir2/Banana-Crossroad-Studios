@@ -5,7 +5,7 @@ using UnityEngine;
  * Authors: Anmoldeep Singh Gill
  *          Chadwick Lapis
  *          Mohammad Bakir
- * Last Modified on: 14th Feb 2020
+ * Last Modified on: 16th Feb 2020
  */
 
 public class attachPlayerToPlatform : MonoBehaviour
@@ -25,8 +25,10 @@ public class attachPlayerToPlatform : MonoBehaviour
         
     }
 
+    // called when other body enters the trigger area of the platform
     private void OnTriggerEnter(Collider other)
     {
+        // attaches the parent of the player transform to the platform's transform
         if (other.gameObject == Player)
         {
             Player.transform.parent = transform;
@@ -34,8 +36,10 @@ public class attachPlayerToPlatform : MonoBehaviour
         }
     }
 
+    // called when other body exits the trigger area of the platform
     private void OnTriggerExit(Collider other)
     {
+        // attaches the parent of the player transform to the platform's transform
         if (other.gameObject == Player)
         {
             Player.transform.parent = null;
