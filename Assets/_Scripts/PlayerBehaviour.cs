@@ -47,22 +47,22 @@ public class PlayerBehaviour : MonoBehaviour
         //controller.Move(move * maxSpeed * Time.deltaTime);
 
         // gets the respective key from the game data to move the player in specific direction
-        if (Input.GetKey(GameData.rightKey) && isGrounded)
+        if (Input.GetKey(GameData.rightKey))
         {
             move = transform.TransformDirection(Vector3.right);
             controller.Move(move * maxSpeed * Time.deltaTime);
         }
-        if (Input.GetKey(GameData.leftKey) && isGrounded)
+        if (Input.GetKey(GameData.leftKey))
         {
             move = transform.TransformDirection(Vector3.left);
             controller.Move(move * maxSpeed * Time.deltaTime);
         }
-        if (Input.GetKey(GameData.forwardKey) && isGrounded)
+        if (Input.GetKey(GameData.forwardKey))
         {
             move = transform.TransformDirection(Vector3.forward);
             controller.Move(move * maxSpeed * Time.deltaTime);
         }
-        if (Input.GetKey(GameData.backKey) && isGrounded)
+        if (Input.GetKey(GameData.backKey))
         {
             move = transform.TransformDirection(Vector3.back);
             controller.Move(move * maxSpeed * Time.deltaTime);
