@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
+guid: 1ce924b0db360104b9436bbe53ef018f
+=======
 guid: 7a52b4344e751b34fa8837993b7f7d91
+>>>>>>> master
 ShaderImporter:
   externalObjects: {}
   defaultTextures: []

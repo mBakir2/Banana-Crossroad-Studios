@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 /**
  * Authors: Anmoldeep Singh Gill
  *          Chadwick Lapis
  *          Mohammad Bakir
- * Last Modified on: 14th Feb 2020
+ * Last Modified on: 16th Feb 2020
  */
 public class KeybindScript : MonoBehaviour
 {
@@ -32,7 +33,8 @@ public class KeybindScript : MonoBehaviour
             {
                 if (Input.GetKey(wKey))
                 {
-                    GameData.wKey = wKey;
+                    GameData.forwardKey = wKey;
+                    wButt.GetComponentInChildren<TMP_Text>().text = wKey.ToString();
                 }
             }
             wButt.enabled = true;
@@ -45,7 +47,8 @@ public class KeybindScript : MonoBehaviour
             {
                 if (Input.GetKey(aKey))
                 {
-                    GameData.aKey = aKey;
+                    GameData.leftKey = aKey;
+                    aButt.GetComponentInChildren<TMP_Text>().text = aKey.ToString();
                 }
             }
             aButt.enabled = true;
@@ -58,7 +61,8 @@ public class KeybindScript : MonoBehaviour
             {
                 if (Input.GetKey(sKey))
                 {
-                    GameData.sKey = sKey;
+                    GameData.backKey = sKey;
+                    sButt.GetComponentInChildren<TMP_Text>().text = sKey.ToString();
                 }
             }
             sButt.enabled = true;
@@ -71,7 +75,8 @@ public class KeybindScript : MonoBehaviour
             {
                 if (Input.GetKey(dKey))
                 {
-                    GameData.dKey = dKey;
+                    GameData.rightKey = dKey;
+                    dButt.GetComponentInChildren<TMP_Text>().text = dKey.ToString();
                 }
             }
             dButt.enabled = true;
@@ -85,6 +90,7 @@ public class KeybindScript : MonoBehaviour
                 if (Input.GetKey(jKey))
                 {
                     GameData.jumpKey = jKey;
+                    jumpButt.GetComponentInChildren<TMP_Text>().text = jKey.ToString();
                 }
             }
             jumpButt.enabled = true;

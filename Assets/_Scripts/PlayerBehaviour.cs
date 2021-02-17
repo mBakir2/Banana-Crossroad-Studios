@@ -5,9 +5,8 @@ using UnityEngine;
  * Authors: Anmoldeep Singh Gill
  *          Chadwick Lapis
  *          Mohammad Bakir
- * Last Modified on: 14th Feb 2020
+ * Last Modified on: 16th Feb 2020
  */
-
 public class PlayerBehaviour : MonoBehaviour
 {
 
@@ -27,7 +26,6 @@ public class PlayerBehaviour : MonoBehaviour
     void Start()
     {
         controller = GetComponent<CharacterController>();
-
     }
 
     // Update is called once per frame
@@ -43,34 +41,34 @@ public class PlayerBehaviour : MonoBehaviour
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
 
-        Vector3 move = transform.right * x + transform.forward * z;
+        Vector3 move;
 
-        controller.Move(move * maxSpeed * Time.deltaTime);
+        //controller.Move(move * maxSpeed * Time.deltaTime);
 
-        /*
-        if (Input.GetKeyDown(GameData.wKey))
+        // gets the respective key from the game data to move the player in specific direction
+        if (Input.GetKey(GameData.rightKey))
         {
-            Vector3 move = transform.right * 1f; //+ transform.forward * z;
+            move = transform.TransformDirection(Vector3.right);
             controller.Move(move * maxSpeed * Time.deltaTime);
         }
-        if (Input.GetKeyDown(GameData.sKey))
+        if (Input.GetKey(GameData.leftKey))
         {
-            Vector3 move = transform.right * -1f;  //+ transform.forward * z;
+            move = transform.TransformDirection(Vector3.left);
             controller.Move(move * maxSpeed * Time.deltaTime);
         }
-        if (Input.GetKeyDown(GameData.aKey))
+        if (Input.GetKey(GameData.forwardKey))
         {
-            Vector3 move = transform.forward * 1f;  //+ transform.right * z;
+            move = transform.TransformDirection(Vector3.forward);
             controller.Move(move * maxSpeed * Time.deltaTime);
         }
-        if (Input.GetKeyDown(GameData.dKey))
+        if (Input.GetKey(GameData.backKey))
         {
-            Vector3 move = transform.forward * -1f;  //+ transform.forward * z;
+            move = transform.TransformDirection(Vector3.back);
             controller.Move(move * maxSpeed * Time.deltaTime);
         }
-        */
 
-        if (Input.GetKeyDown(GameData.jumpKey) && isGrounded)
+        // getting the user selected jump key to increase the y coordinate of the player object
+        if (Input.GetKey(GameData.jumpKey) && isGrounded)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2.0f * gravity);
         }
