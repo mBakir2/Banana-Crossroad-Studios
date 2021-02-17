@@ -42,6 +42,8 @@ public class MainMenuScript : MonoBehaviour
     public void PlayGame()
     {
         SceneManager.LoadScene(1);
+        GameData.win = false;
+        GameData.goals = 0;
     }
     public void QuitGame()
     {

@@ -33,7 +33,6 @@ public class KeybindScript : MonoBehaviour
                 if (Input.GetKey(wKey))
                 {
                     GameData.forwardKey = wKey;
-                    Debug.Log(GameData.forwardKey);
                 }
             }
             wButt.enabled = true;

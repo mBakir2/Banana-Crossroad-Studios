@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 /**
  * Authors: Anmoldeep Singh Gill
  *          Chadwick Lapis
@@ -27,6 +29,12 @@ public class GameController : MonoBehaviour
             pauseMenu.SetActive(true);
             Cursor.lockState = CursorLockMode.None;
             Time.timeScale = 0f;
+        }
+
+        if (GameData.goals == 2)
+        {
+            GameData.win = true;
+            SceneManager.LoadScene(2);
         }
     }
 
