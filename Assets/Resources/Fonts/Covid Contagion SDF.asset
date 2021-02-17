@@ -55,7 +55,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Covid Contagion SDF Material
-  m_Shader: {fileID: 4800000, guid: 67b34c6584e20d845bae16b879822b1c, type: 3}
+  m_Shader: {fileID: 4800000, guid: 9107b5c04497b1c44946353c4bff8b65, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
