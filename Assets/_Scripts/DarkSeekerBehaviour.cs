@@ -35,7 +35,7 @@ public class DarkSeekerBehaviour : MonoBehaviour
             agent.SetDestination(player.transform.position);
             animator.SetInteger("AnimState", (int)DarkSeekerState.RUN);
 
-            if (Vector3.Distance(transform.position, player.transform.position) < 2.0) {
+            if (Vector3.Distance(transform.position, player.transform.position) < 3.5) {
 
                 animator.SetInteger("AnimState", (int)DarkSeekerState.ATTACK);
                 // look towards the player
