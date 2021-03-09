@@ -25,6 +25,7 @@ public class DarkSeekerBehaviour : MonoBehaviour
     public PlayerBehaviour playerBehaviour;
     public float cooldown = 1f;
     private float lastAttackedAt = -9999f;
+    public int damageAmount = 10;
 
     // Start is called before the first frame update
     void Start()
@@ -40,23 +41,28 @@ public class DarkSeekerBehaviour : MonoBehaviour
         if (hasLos)
         {
             agent.SetDestination(player.transform.position);
-        } 
 
         if (hasLos && Vector3.Distance(transform.position, player.transform.position) < attackDistance)
         {
             // look towards the player
             transform.LookAt(transform.position - player.transform.forward);
+
+            //cooldown to do the attack after specified intervals
             if (Time.time > lastAttackedAt + cooldown)
             {
-                //do the attack
                 animator.SetInteger("AnimState", (int)DarkSeekerState.ATTACK);
-                playerBehaviour.TakeDamage(20);
+                playerBehaviour.TakeDamage(damageAmount);
                 lastAttackedAt = Time.time;
             }
         }
         else
         {
             animator.SetInteger("AnimState", (int)DarkSeekerState.RUN);
+        }
+        }
+        else
+        {
+            animator.SetInteger("AnimState", (int)DarkSeekerState.IDLE);
         }
 
     }

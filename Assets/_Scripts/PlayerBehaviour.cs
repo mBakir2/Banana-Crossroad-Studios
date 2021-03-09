@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 /**
  * Authors: Anmoldeep Singh Gill
  *          Chadwick Lapis
@@ -31,10 +32,14 @@ public class PlayerBehaviour : MonoBehaviour
     [Header("Player Health Bar")]
     public HealthBarScreenSpaceController playerHealthBar;
 
+    [Header("Player Sounds")]
+    public AudioSource attackSound;
+
     // Start is called before the first frame update
     void Start()
     {
         controller = GetComponent<CharacterController>();
+        GameData.playerHealth = health;
     }
 
     // Update is called once per frame
@@ -97,10 +102,13 @@ public class PlayerBehaviour : MonoBehaviour
     public void TakeDamage(int damage)
     {
         health -= damage;
+        GameData.playerHealth = health;
         playerHealthBar.TakeDamage(damage);
-        if (health < 0)
+        attackSound.Play();
+        if (GameData.playerHealth < 0)
         {
-            health = 0;
+            SceneManager.LoadScene(2);
+            Cursor.lockState = CursorLockMode.None;
         }
     }
 }
