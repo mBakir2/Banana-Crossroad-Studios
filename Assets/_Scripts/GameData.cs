@@ -20,6 +20,7 @@ public static class GameData
     public static int ammoPistol { get; set; } = 0;
     public static int gunActive { get; set; } = 0;
     public static int aidKits { get; set; } = 0;
+    public static int playerHealth { get; set; } = 100;
     public static KeyCode forwardKey { get; set; } = KeyCode.W;
     public static KeyCode leftKey { get; set; } = KeyCode.A;
     public static KeyCode backKey { get; set; } = KeyCode.S;
