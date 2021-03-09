@@ -2,7 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
-
+/**
+ * Authors: Anmoldeep Singh Gill
+ *          Chadwick Lapis
+ *          Mohammad Bakir
+ * Last Modified on: 14th Feb 2020
+ */
 public class VolumeChange : MonoBehaviour
 {
     public AudioMixer mixer;

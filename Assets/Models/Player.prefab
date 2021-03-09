@@ -1603,7 +1603,6 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 8
-  velocity: {x: 0, y: 0, z: 0}
   isGrounded: 0
   animator: {fileID: 1519533166250746201}
 --- !u!1 &1519533166273073224

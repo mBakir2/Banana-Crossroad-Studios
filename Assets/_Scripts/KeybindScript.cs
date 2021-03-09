@@ -20,12 +20,17 @@ public class KeybindScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        wButt.GetComponentInChildren<TMP_Text>().text = GameData.forwardKey + "/Front";
+        aButt.GetComponentInChildren<TMP_Text>().text = GameData.leftKey + "/Left";
+        sButt.GetComponentInChildren<TMP_Text>().text = GameData.backKey + "/Back";
+        dButt.GetComponentInChildren<TMP_Text>().text = GameData.rightKey + "/Right";
+        jumpButt.GetComponentInChildren<TMP_Text>().text = GameData.jumpKey + "/Jump.";
     }
 
     // Update is called once per frame
     void Update()
     {
+        // getting the user input and saving the pressed key as the keycode for that action
         if (!wButt.enabled && Input.anyKeyDown)
         {
             pressCanvas.SetActive(false);
@@ -34,7 +39,7 @@ public class KeybindScript : MonoBehaviour
                 if (Input.GetKey(wKey))
                 {
                     GameData.forwardKey = wKey;
-                    wButt.GetComponentInChildren<TMP_Text>().text = wKey.ToString();
+                    wButt.GetComponentInChildren<TMP_Text>().text = wKey.ToString() + "/Front";
                 }
             }
             wButt.enabled = true;
@@ -48,7 +53,7 @@ public class KeybindScript : MonoBehaviour
                 if (Input.GetKey(aKey))
                 {
                     GameData.leftKey = aKey;
-                    aButt.GetComponentInChildren<TMP_Text>().text = aKey.ToString();
+                    aButt.GetComponentInChildren<TMP_Text>().text = aKey.ToString() + "/Left";
                 }
             }
             aButt.enabled = true;
@@ -62,7 +67,7 @@ public class KeybindScript : MonoBehaviour
                 if (Input.GetKey(sKey))
                 {
                     GameData.backKey = sKey;
-                    sButt.GetComponentInChildren<TMP_Text>().text = sKey.ToString();
+                    sButt.GetComponentInChildren<TMP_Text>().text = sKey.ToString() + "/Back";
                 }
             }
             sButt.enabled = true;
@@ -76,7 +81,7 @@ public class KeybindScript : MonoBehaviour
                 if (Input.GetKey(dKey))
                 {
                     GameData.rightKey = dKey;
-                    dButt.GetComponentInChildren<TMP_Text>().text = dKey.ToString();
+                    dButt.GetComponentInChildren<TMP_Text>().text = dKey.ToString() + "/Right";
                 }
             }
             dButt.enabled = true;
@@ -90,7 +95,7 @@ public class KeybindScript : MonoBehaviour
                 if (Input.GetKey(jKey))
                 {
                     GameData.jumpKey = jKey;
-                    jumpButt.GetComponentInChildren<TMP_Text>().text = jKey.ToString();
+                    jumpButt.GetComponentInChildren<TMP_Text>().text = jKey.ToString() + "/Jump";
                 }
             }
             jumpButt.enabled = true;
