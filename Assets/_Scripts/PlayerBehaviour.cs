@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 /**
  * Authors: Anmoldeep Singh Gill
  *          Chadwick Lapis
@@ -12,20 +13,33 @@ public class PlayerBehaviour : MonoBehaviour
 
     public CharacterController controller;
 
+    [Header("Movement")]
     public float maxSpeed = 10.0f;
     public float gravity = -30f;
     public float jumpHeight = 3.0f;
 
+    [Header("Ground Detection")]
     public Transform groundCheck;
     public float groundRadius = 0.5f;
     public LayerMask groundMask;
-
     public Vector3 velocity;
     public bool isGrounded;
+
+    [Header("Player Abilities")]
+    [Range(0, 100)]
+    public int health = 100;
+
+    [Header("Player Health Bar")]
+    public HealthBarScreenSpaceController playerHealthBar;
+
+    [Header("Player Sounds")]
+    public AudioSource attackSound;
+
     // Start is called before the first frame update
     void Start()
     {
         controller = GetComponent<CharacterController>();
+        GameData.playerHealth = health;
     }
 
     // Update is called once per frame
@@ -83,5 +97,18 @@ public class PlayerBehaviour : MonoBehaviour
     {
         Gizmos.color = Color.white;
         Gizmos.DrawWireSphere(groundCheck.position, groundRadius);
+    }
+
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+        GameData.playerHealth = health;
+        playerHealthBar.TakeDamage(damage);
+        attackSound.Play();
+        if (GameData.playerHealth < 0)
+        {
+            SceneManager.LoadScene(2);
+            Cursor.lockState = CursorLockMode.None;
+        }
     }
 }

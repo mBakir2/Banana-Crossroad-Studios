@@ -20,11 +20,19 @@ public class DarkSeekerBehaviour : MonoBehaviour
     public bool hasLos = false;
     public GameObject player;
 
+    [Header("Attack")]
+    public float attackDistance;
+    public PlayerBehaviour playerBehaviour;
+    public float cooldown = 1f;
+    private float lastAttackedAt = -9999f;
+    public int damageAmount = 10;
+
     // Start is called before the first frame update
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+        playerBehaviour = FindObjectOfType<PlayerBehaviour>();
     }
 
     // Update is called once per frame
@@ -33,29 +41,30 @@ public class DarkSeekerBehaviour : MonoBehaviour
         if (hasLos)
         {
             agent.SetDestination(player.transform.position);
-            animator.SetInteger("AnimState", (int)DarkSeekerState.RUN);
 
-            if (Vector3.Distance(transform.position, player.transform.position) < 2.0) {
+        if (hasLos && Vector3.Distance(transform.position, player.transform.position) < attackDistance)
+        {
+            // look towards the player
+            transform.LookAt(transform.position - player.transform.forward);
 
+            //cooldown to do the attack after specified intervals
+            if (Time.time > lastAttackedAt + cooldown)
+            {
                 animator.SetInteger("AnimState", (int)DarkSeekerState.ATTACK);
-                // look towards the player
-                transform.LookAt(transform.position - player.transform.forward);
+                playerBehaviour.TakeDamage(damageAmount);
+                lastAttackedAt = Time.time;
             }
-        } 
+        }
+        else
+        {
+            animator.SetInteger("AnimState", (int)DarkSeekerState.RUN);
+        }
+        }
         else
         {
             animator.SetInteger("AnimState", (int)DarkSeekerState.IDLE);
         }
 
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            animator.SetInteger("AnimState", (int)DarkSeekerState.DIE);
-        }
-
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            animator.SetInteger("AnimState", (int)DarkSeekerState.ATTACK);
-        }
     }
 
     void OnTriggerEnter(Collider other)
@@ -64,14 +73,6 @@ public class DarkSeekerBehaviour : MonoBehaviour
         {
             hasLos = true;
             player = other.transform.gameObject;
-        }
-    }
-
-    void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            hasLos = false;
         }
     }
 }
