@@ -20,13 +20,18 @@ public class DarkSeekerBehaviour : MonoBehaviour
     public bool hasLos = false;
     public GameObject player;
 
+    [Header("Attack")]
     public float attackDistance;
+    public PlayerBehaviour playerBehaviour;
+    public float cooldown = 1f;
+    private float lastAttackedAt = -9999f;
 
     // Start is called before the first frame update
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+        playerBehaviour = FindObjectOfType<PlayerBehaviour>();
     }
 
     // Update is called once per frame
@@ -39,10 +44,15 @@ public class DarkSeekerBehaviour : MonoBehaviour
 
         if (hasLos && Vector3.Distance(transform.position, player.transform.position) < attackDistance)
         {
-
-            animator.SetInteger("AnimState", (int)DarkSeekerState.ATTACK);
             // look towards the player
             transform.LookAt(transform.position - player.transform.forward);
+            if (Time.time > lastAttackedAt + cooldown)
+            {
+                //do the attack
+                animator.SetInteger("AnimState", (int)DarkSeekerState.ATTACK);
+                playerBehaviour.TakeDamage(20);
+                lastAttackedAt = Time.time;
+            }
         }
         else
         {

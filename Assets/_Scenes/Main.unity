@@ -7106,6 +7106,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1510804227}
   m_CullTransparentMesh: 1
+--- !u!114 &1514609906 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 288345733382236990, guid: 7620ee8ea47f2304599a8d361f23f885, type: 3}
+  m_PrefabInstance: {fileID: 840712277}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5feb12c1658c31b4e91d94c54a362909, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1520801178
 GameObject:
   m_ObjectHideFlags: 0
@@ -10166,6 +10177,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1519533165969882475, guid: fd35ed0080fe7ad4c816a3f1e35ad996, type: 3}
+      propertyPath: playerHealthBar
+      value: 
+      objectReference: {fileID: 1514609906}
     - target: {fileID: 1519533165969882477, guid: fd35ed0080fe7ad4c816a3f1e35ad996, type: 3}
       propertyPath: m_Name
       value: Player
@@ -10179,6 +10194,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 919132149025503341, guid: 4a9957a2f1f287c46ae1384ed44861cf, type: 3}
+      propertyPath: cooldown
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3601315317490436354, guid: 4a9957a2f1f287c46ae1384ed44861cf, type: 3}
       propertyPath: m_RootOrder
       value: 1

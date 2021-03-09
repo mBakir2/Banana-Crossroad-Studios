@@ -569,9 +569,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1519533165969882474}
   - component: {fileID: 1519533165969882473}
-  - component: {fileID: 1519533165969882475}
   - component: {fileID: 1519533165969882472}
   - component: {fileID: 1519533165969882476}
+  - component: {fileID: 1519533165969882475}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -614,29 +614,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1519533165969882475
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1519533165969882477}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a22e76428213edb4693ffe1c099563f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  controller: {fileID: 0}
-  maxSpeed: 10
-  gravity: -30
-  jumpHeight: 3
-  groundCheck: {fileID: 1519533167464553307}
-  groundRadius: 0.5
-  groundMask:
-    serializedVersion: 2
-    m_Bits: 8
-  velocity: {x: 0, y: 0, z: 0}
-  isGrounded: 0
 --- !u!54 &1519533165969882472
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -667,6 +644,29 @@ CapsuleCollider:
   m_Height: 2.7516322
   m_Direction: 1
   m_Center: {x: 0, y: 0.1788683, z: -0.56873703}
+--- !u!114 &1519533165969882475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1519533165969882477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a22e76428213edb4693ffe1c099563f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controller: {fileID: 0}
+  maxSpeed: 10
+  gravity: -30
+  jumpHeight: 3
+  groundCheck: {fileID: 1519533167464553307}
+  groundRadius: 0.5
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 8
+  velocity: {x: 0, y: 0, z: 0}
+  isGrounded: 0
 --- !u!1 &1519533165977680000
 GameObject:
   m_ObjectHideFlags: 0
