@@ -34,19 +34,17 @@ public class DarkSeekerBehaviour : MonoBehaviour
         {
             agent.SetDestination(player.transform.position);
             animator.SetInteger("AnimState", (int)DarkSeekerState.RUN);
+
+            if (Vector3.Distance(transform.position, player.transform.position) < 2.0) {
+
+                animator.SetInteger("AnimState", (int)DarkSeekerState.ATTACK);
+                // look towards the player
+                transform.LookAt(transform.position - player.transform.forward);
+            }
         } 
         else
         {
             animator.SetInteger("AnimState", (int)DarkSeekerState.IDLE);
-        }
-
-        if (Input.GetKeyDown(KeyCode.U))
-        {
-
-        }
-
-        if (Input.GetKeyDown(KeyCode.I))
-        {
         }
 
         if (Input.GetKeyDown(KeyCode.O))
