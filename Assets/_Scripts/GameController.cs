@@ -34,7 +34,7 @@ public class GameController : MonoBehaviour
     void Update()
     {
         //pauses game
-        if (Input.GetButton("Cancel"))
+        if (Input.GetKeyDown(KeyCode.P))
         {
             pauseMenu.SetActive(true);
             Cursor.lockState = CursorLockMode.None;
