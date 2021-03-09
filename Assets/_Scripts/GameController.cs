@@ -144,6 +144,7 @@ public class GameController : MonoBehaviour
         Debug.Log(json);
 
         // making a new file and writing the json data
+        // temporary commenting the saving beacuse of an error while playing on deployed site
         File.WriteAllText(Application.dataPath + "/SaveData/saveGame1.json", json);
     }
 
