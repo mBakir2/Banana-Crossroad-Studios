@@ -20,6 +20,8 @@ public class DarkSeekerBehaviour : MonoBehaviour
     public bool hasLos = false;
     public GameObject player;
 
+    public float attackDistance;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,29 +35,20 @@ public class DarkSeekerBehaviour : MonoBehaviour
         if (hasLos)
         {
             agent.SetDestination(player.transform.position);
-            animator.SetInteger("AnimState", (int)DarkSeekerState.RUN);
-
-            if (Vector3.Distance(transform.position, player.transform.position) < 3.5) {
-
-                animator.SetInteger("AnimState", (int)DarkSeekerState.ATTACK);
-                // look towards the player
-                transform.LookAt(transform.position - player.transform.forward);
-            }
         } 
+
+        if (hasLos && Vector3.Distance(transform.position, player.transform.position) < attackDistance)
+        {
+
+            animator.SetInteger("AnimState", (int)DarkSeekerState.ATTACK);
+            // look towards the player
+            transform.LookAt(transform.position - player.transform.forward);
+        }
         else
         {
-            animator.SetInteger("AnimState", (int)DarkSeekerState.IDLE);
+            animator.SetInteger("AnimState", (int)DarkSeekerState.RUN);
         }
 
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            animator.SetInteger("AnimState", (int)DarkSeekerState.DIE);
-        }
-
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            animator.SetInteger("AnimState", (int)DarkSeekerState.ATTACK);
-        }
     }
 
     void OnTriggerEnter(Collider other)
@@ -64,14 +57,6 @@ public class DarkSeekerBehaviour : MonoBehaviour
         {
             hasLos = true;
             player = other.transform.gameObject;
-        }
-    }
-
-    void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            hasLos = false;
         }
     }
 }
