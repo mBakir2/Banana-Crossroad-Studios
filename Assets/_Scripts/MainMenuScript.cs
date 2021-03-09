@@ -18,6 +18,8 @@ public class MainMenuScript : MonoBehaviour
     public GameObject winSound;
     public GameObject loseText;
     public GameObject loseSound;
+
+    public GameObject quitScr;
     // Start is called before the first frame update
     void Start()
     {
@@ -49,6 +51,7 @@ public class MainMenuScript : MonoBehaviour
     {
         Debug.Log("The game has quit");
         //Application.Quit();
+        quitScr.SetActive(true);
     }
     public void MainMenu()
     {
