@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
  * Authors: Anmoldeep Singh Gill
  *          Chadwick Lapis
  *          Mohammad Bakir
- * Last Modified on: 16th Feb 2020
+ * Last Modified on: 8th Mar 2020
  */
 public class PlayerBehaviour : MonoBehaviour
 {
@@ -90,6 +90,23 @@ public class PlayerBehaviour : MonoBehaviour
         velocity.y += gravity * Time.deltaTime;
 
         controller.Move(velocity * Time.deltaTime);
+
+        if (Input.GetKey(KeyCode.Alpha1) && GameData.hasRifle)
+        {
+            GameData.gunActive = 1;
+        }
+        if (Input.GetKey(KeyCode.Alpha2) && GameData.hasPistol)
+        {
+            GameData.gunActive = 2;
+        }
+        if (Input.GetKey(KeyCode.Alpha3))
+        {
+            if (GameData.aidKits != 0)
+            {
+                GameData.aidKits--;
+                GameData.playerHealth += 50;
+            }
+        }
 
     }
 

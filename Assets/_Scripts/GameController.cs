@@ -8,12 +8,21 @@ using TMPro;
  * Authors: Anmoldeep Singh Gill
  *          Chadwick Lapis
  *          Mohammad Bakir
- * Last Modified on: 16th Feb 2020
+ * Last Modified on: 8th Mar 2020
  */
 public class GameController : MonoBehaviour
 {
     public GameObject pauseMenu;
+    public GameObject inventory;
     public GameObject completion;
+    public GameObject uiRifle;
+    public GameObject uiRifleActive;
+    public GameObject uiPistol;
+    public GameObject uiPistolActive;
+    public GameObject uiRifAmmo;
+    public GameObject uiPisAmmo;
+    public GameObject ammo;
+    public GameObject uiAid;
     // Start is called before the first frame update
     void Start()
     {
@@ -43,6 +52,48 @@ public class GameController : MonoBehaviour
             // updates the game UI if the player has completed a goal
             completion.GetComponent<TMP_Text>().text = "Cures to Deliver " + GameData.goals + "/" + GameData.totalgoals;
         }
+
+        //inventory
+        if (Input.GetKeyDown(KeyCode.I) && !inventory.activeSelf)
+        {
+            inventory.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+        }
+        else if (Input.GetKeyDown(KeyCode.I))
+        {
+            inventory.SetActive(false);
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+
+        //updates user ui -  items
+        if (GameData.hasRifle)
+        {
+            uiRifle.SetActive(true);
+        }
+        if (GameData.hasPistol)
+        {
+            uiPistol.SetActive(true);
+        }
+
+        if (GameData.gunActive == 1)
+        {
+            uiRifleActive.SetActive(true);
+            uiPistolActive.SetActive(false);
+            ammo.GetComponent<TMP_Text>().text = GameData.ammoRifle.ToString();
+            uiRifAmmo.SetActive(true);
+            uiPisAmmo.SetActive(false);
+        }
+        else if (GameData.gunActive == 2)
+        {
+            uiRifleActive.SetActive(false);
+            uiPistolActive.SetActive(true);
+            ammo.GetComponent<TMP_Text>().text = GameData.ammoPistol.ToString();
+            uiRifAmmo.SetActive(false);
+            uiPisAmmo.SetActive(true);
+        }
+
+        uiAid.GetComponent<TMP_Text>().text = GameData.aidKits.ToString();
+
     }
 
     // resume the game
