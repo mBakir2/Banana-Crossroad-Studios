@@ -31,6 +31,7 @@ public class GameController : MonoBehaviour
             Time.timeScale = 0f;
         }
 
+        // displays the win screen if the player has completed all the goals
         if (GameData.goals == GameData.totalgoals)
         {
             GameData.win = true;
@@ -39,10 +40,12 @@ public class GameController : MonoBehaviour
         }
         else
         {
+            // updates the game UI if the player has completed a goal
             completion.GetComponent<TMP_Text>().text = "Cures to Deliver " + GameData.goals + "/" + GameData.totalgoals;
         }
     }
 
+    // resume the game
     public void UnPauseGC()
     {
         Cursor.lockState = CursorLockMode.Locked;
