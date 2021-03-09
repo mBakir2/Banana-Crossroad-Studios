@@ -20,7 +20,11 @@ public class KeybindScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        wButt.GetComponentInChildren<TMP_Text>().text = GameData.forwardKey + "/Front";
+        aButt.GetComponentInChildren<TMP_Text>().text = GameData.leftKey + "/Left";
+        sButt.GetComponentInChildren<TMP_Text>().text = GameData.backKey + "/Back";
+        dButt.GetComponentInChildren<TMP_Text>().text = GameData.rightKey + "/Right";
+        jumpButt.GetComponentInChildren<TMP_Text>().text = GameData.jumpKey + "/Jump.";
     }
 
     // Update is called once per frame
