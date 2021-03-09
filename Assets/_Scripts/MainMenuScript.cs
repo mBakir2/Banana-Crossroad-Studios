@@ -46,6 +46,13 @@ public class MainMenuScript : MonoBehaviour
         SceneManager.LoadScene(1);
         GameData.win = false;
         GameData.goals = 0;
+        GameData.playerHealth = 100;
+        GameData.hasPistol = false;
+        GameData.hasRifle = false;
+        GameData.aidKits = 0;
+        GameData.ammoPistol = 0;
+        GameData.ammoRifle = 0;
+        GameData.gunActive = 0;
     }
     public void QuitGame()
     {

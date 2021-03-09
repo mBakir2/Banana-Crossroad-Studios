@@ -104,9 +104,7 @@ public class PlayerBehaviour : MonoBehaviour
             if (GameData.aidKits != 0)
             {
                 GameData.aidKits--;
-                /*
-                 * increase health here
-                 */
+                GameData.playerHealth += 50;
             }
         }
 
