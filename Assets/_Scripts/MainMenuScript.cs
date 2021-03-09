@@ -18,6 +18,8 @@ public class MainMenuScript : MonoBehaviour
     public GameObject winSound;
     public GameObject loseText;
     public GameObject loseSound;
+
+    public GameObject quitScr;
     // Start is called before the first frame update
     void Start()
     {
@@ -44,11 +46,19 @@ public class MainMenuScript : MonoBehaviour
         SceneManager.LoadScene(1);
         GameData.win = false;
         GameData.goals = 0;
+        GameData.playerHealth = 100;
+        GameData.hasPistol = false;
+        GameData.hasRifle = false;
+        GameData.aidKits = 0;
+        GameData.ammoPistol = 0;
+        GameData.ammoRifle = 0;
+        GameData.gunActive = 0;
     }
     public void QuitGame()
     {
         Debug.Log("The game has quit");
         //Application.Quit();
+        quitScr.SetActive(true);
     }
     public void MainMenu()
     {

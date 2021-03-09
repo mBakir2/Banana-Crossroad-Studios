@@ -13,6 +13,7 @@ using TMPro;
 public class GameController : MonoBehaviour
 {
     public GameObject pauseMenu;
+    public GameObject inventory;
     public GameObject completion;
     public GameObject uiRifle;
     public GameObject uiRifleActive;
@@ -50,6 +51,18 @@ public class GameController : MonoBehaviour
         {
             // updates the game UI if the player has completed a goal
             completion.GetComponent<TMP_Text>().text = "Cures to Deliver " + GameData.goals + "/" + GameData.totalgoals;
+        }
+
+        //inventory
+        if (Input.GetKeyDown(KeyCode.I) && !inventory.activeSelf)
+        {
+            inventory.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+        }
+        else if (Input.GetKeyDown(KeyCode.I))
+        {
+            inventory.SetActive(false);
+            Cursor.lockState = CursorLockMode.Locked;
         }
 
         //updates user ui -  items
