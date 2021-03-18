@@ -93,10 +93,10 @@ public class PlayerBehaviour : MonoBehaviour
         controller.Move(move * maxSpeed * Time.deltaTime);
 
         // getting the user selected jump key to increase the y coordinate of the player object
-        if (Input.GetKey(GameData.jumpKey) && isGrounded)
-        {
-            velocity.y = Mathf.Sqrt(jumpHeight * -2.0f * gravity);
-        }
+        //if (Input.GetKey(GameData.jumpKey) && isGrounded)
+        //{
+        //    Jump()
+        //}
 
         velocity.y += gravity * Time.deltaTime;
 
@@ -136,7 +136,18 @@ public class PlayerBehaviour : MonoBehaviour
         if (GameData.playerHealth < 0)
         {
             SceneManager.LoadScene(2);
-            Cursor.lockState = CursorLockMode.None;
+            //Cursor.lockState = CursorLockMode.None;
         }
     }
+
+    // increases the players y coordinates to make him jump
+    public void Jump()
+    {
+        if (isGrounded)
+        {
+            velocity.y = Mathf.Sqrt(jumpHeight * -2.0f * gravity);
+        }
+    }
+
+
 }

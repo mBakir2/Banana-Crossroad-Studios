@@ -34,19 +34,19 @@ public class GameController : MonoBehaviour
     void Update()
     {
         //pauses game
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            pauseMenu.SetActive(true);
-            Cursor.lockState = CursorLockMode.None;
-            Time.timeScale = 0f;
-        }
+        //if (Input.GetKeyDown(KeyCode.P))
+        //{
+        //    pauseGame();
+        //    Cursor.lockState = CursorLockMode.None;
+        //    Time.timeScale = 0f;
+        //}
 
         // displays the win screen if the player has completed all the goals
         if (GameData.goals == GameData.totalgoals)
         {
             GameData.win = true;
             SceneManager.LoadScene(2);
-            Cursor.lockState = CursorLockMode.None;
+            //Cursor.lockState = CursorLockMode.None;
         }
         else
         {
@@ -58,12 +58,12 @@ public class GameController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.I) && !inventory.activeSelf)
         {
             inventory.SetActive(true);
-            Cursor.lockState = CursorLockMode.None;
+            //Cursor.lockState = CursorLockMode.None;
         }
         else if (Input.GetKeyDown(KeyCode.I))
         {
             inventory.SetActive(false);
-            Cursor.lockState = CursorLockMode.Locked;
+            //Cursor.lockState = CursorLockMode.Locked;
         }
 
         //updates user ui -  items
@@ -100,7 +100,7 @@ public class GameController : MonoBehaviour
     // resume the game
     public void UnPauseGC()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.lockState = CursorLockMode.Locked;
         Time.timeScale = 1f;
     }
 
@@ -170,5 +170,15 @@ public class GameController : MonoBehaviour
     {
         public string name;
         public Vector3 position;
+    }
+
+    public void pauseGame()
+    {
+        pauseMenu.SetActive(true);
+    }
+
+    public void onPauseButtonPressed()
+    {
+        pauseGame();
     }
 }
