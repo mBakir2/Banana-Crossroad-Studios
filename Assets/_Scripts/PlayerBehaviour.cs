@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
  * Authors: Anmoldeep Singh Gill
  *          Chadwick Lapis
  *          Mohammad Bakir
- * Last Modified on: 16th Feb 2020
+ * Last Modified on: 8th Mar 2020
  */
 public class PlayerBehaviour : MonoBehaviour
 {
@@ -35,6 +35,9 @@ public class PlayerBehaviour : MonoBehaviour
     [Header("Player Sounds")]
     public AudioSource attackSound;
 
+    [Header("Player Controls")]
+    public Joystick joystick;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -52,44 +55,69 @@ public class PlayerBehaviour : MonoBehaviour
             velocity.y = -2.0f;
         }
 
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
+        //float x = Input.GetAxis("Horizontal");
+        //float z = Input.GetAxis("Vertical");
 
-        Vector3 move;
+        //Vector3 move;
 
         //controller.Move(move * maxSpeed * Time.deltaTime);
 
+        // key mapping for webGL
         // gets the respective key from the game data to move the player in specific direction
-        if (Input.GetKey(GameData.rightKey))
-        {
-            move = transform.TransformDirection(Vector3.right);
-            controller.Move(move * maxSpeed * Time.deltaTime);
-        }
-        if (Input.GetKey(GameData.leftKey))
-        {
-            move = transform.TransformDirection(Vector3.left);
-            controller.Move(move * maxSpeed * Time.deltaTime);
-        }
-        if (Input.GetKey(GameData.forwardKey))
-        {
-            move = transform.TransformDirection(Vector3.forward);
-            controller.Move(move * maxSpeed * Time.deltaTime);
-        }
-        if (Input.GetKey(GameData.backKey))
-        {
-            move = transform.TransformDirection(Vector3.back);
-            controller.Move(move * maxSpeed * Time.deltaTime);
-        }
+        //if (Input.GetKey(GameData.rightKey))
+        //{
+        //    move = transform.TransformDirection(Vector3.right);
+        //    controller.Move(move * maxSpeed * Time.deltaTime);
+        //}
+        //if (Input.GetKey(GameData.leftKey))
+        //{
+        //    move = transform.TransformDirection(Vector3.left);
+        //    controller.Move(move * maxSpeed * Time.deltaTime);
+        //}
+        //if (Input.GetKey(GameData.forwardKey))
+        //{
+        //    move = transform.TransformDirection(Vector3.forward);
+        //    controller.Move(move * maxSpeed * Time.deltaTime);
+        //}
+        //if (Input.GetKey(GameData.backKey))
+        //{
+        //    move = transform.TransformDirection(Vector3.back);
+        //    controller.Move(move * maxSpeed * Time.deltaTime);
+        //}
+
+        float x = joystick.Horizontal;
+        float z = joystick.Vertical;
+
+        Vector3 move = transform.right * x + transform.forward * z;
+
+        controller.Move(move * maxSpeed * Time.deltaTime);
 
         // getting the user selected jump key to increase the y coordinate of the player object
-        if (Input.GetKey(GameData.jumpKey) && isGrounded)
-        {
-            velocity.y = Mathf.Sqrt(jumpHeight * -2.0f * gravity);
-        }
+        //if (Input.GetKey(GameData.jumpKey) && isGrounded)
+        //{
+        //    Jump()
+        //}
 
         velocity.y += gravity * Time.deltaTime;
 
         controller.Move(velocity * Time.deltaTime);
+
+        if (Input.GetKey(KeyCode.Alpha1) && GameData.hasRifle)
+        {
+            GameData.gunActive = 1;
+        }
+        if (Input.GetKey(KeyCode.Alpha2) && GameData.hasPistol)
+        {
+            GameData.gunActive = 2;
+        }
+        if (Input.GetKey(KeyCode.Alpha3))
+        {
+            if (GameData.aidKits != 0)
+            {
+                GameData.aidKits--;
+                GameData.playerHealth += 50;
+            }
+        }
 
     }
 
@@ -108,7 +136,18 @@ public class PlayerBehaviour : MonoBehaviour
         if (GameData.playerHealth < 0)
         {
             SceneManager.LoadScene(2);
-            Cursor.lockState = CursorLockMode.None;
+            //Cursor.lockState = CursorLockMode.None;
         }
     }
+
+    // increases the players y coordinates to make him jump
+    public void Jump()
+    {
+        if (isGrounded)
+        {
+            velocity.y = Mathf.Sqrt(jumpHeight * -2.0f * gravity);
+        }
+    }
+
+
 }
