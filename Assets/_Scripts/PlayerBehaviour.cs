@@ -102,22 +102,23 @@ public class PlayerBehaviour : MonoBehaviour
 
         controller.Move(velocity * Time.deltaTime);
 
-        if (Input.GetKey(KeyCode.Alpha1) && GameData.hasRifle)
-        {
-            GameData.gunActive = 1;
-        }
-        if (Input.GetKey(KeyCode.Alpha2) && GameData.hasPistol)
-        {
-            GameData.gunActive = 2;
-        }
-        if (Input.GetKey(KeyCode.Alpha3))
-        {
-            if (GameData.aidKits != 0)
-            {
-                GameData.aidKits--;
-                GameData.playerHealth += 50;
-            }
-        }
+        // Web GL key mapping
+        //if (Input.GetKey(KeyCode.Alpha1) && GameData.hasRifle)
+        //{
+        //    GameData.gunActive = 1;
+        //}
+        //if (Input.GetKey(KeyCode.Alpha2) && GameData.hasPistol)
+        //{
+        //    GameData.gunActive = 2;
+        //}
+        //if (Input.GetKey(KeyCode.Alpha3))
+        //{
+        //    if (GameData.aidKits != 0)
+        //    {
+        //        GameData.aidKits--;
+        //        GameData.playerHealth += 50;
+        //    }
+        //}
 
     }
 

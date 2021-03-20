@@ -19,6 +19,8 @@ public static class GameData
     public static bool hasPistol { get; set; } = false;
     public static int ammoRifle { get; set; } = 0;
     public static int ammoPistol { get; set; } = 0;
+
+    // 0 = No Gun, 1 = Rifle, 2 = Pistol
     public static int gunActive { get; set; } = 0;
     public static int aidKits { get; set; } = 0;
     public static KeyCode forwardKey { get; set; } = KeyCode.W;
