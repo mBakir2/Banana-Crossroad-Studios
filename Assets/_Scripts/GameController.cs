@@ -181,4 +181,25 @@ public class GameController : MonoBehaviour
     {
         pauseGame();
     }
+
+    public void SelectRifle()
+    {
+        Debug.Log("Rifle Selected");
+        GameData.gunActive = 1;
+    }
+
+    public void SelectPistol()
+    {
+        Debug.Log("Pistol Selected");
+        GameData.gunActive = 2;
+    }
+
+    public void UseMedkit()
+    {
+        if (GameData.aidKits != 0)
+        {
+            GameData.aidKits--;
+            GameData.playerHealth += 50;
+        }
+    }
 }
