@@ -35,6 +35,9 @@ public class PlayerBehaviour : MonoBehaviour
     [Header("Player Sounds")]
     public AudioSource attackSound;
 
+    [Header("Player Controls")]
+    public Joystick joystick;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -52,40 +55,48 @@ public class PlayerBehaviour : MonoBehaviour
             velocity.y = -2.0f;
         }
 
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
+        //float x = Input.GetAxis("Horizontal");
+        //float z = Input.GetAxis("Vertical");
 
-        Vector3 move;
+        //Vector3 move;
 
         //controller.Move(move * maxSpeed * Time.deltaTime);
 
+        // key mapping for webGL
         // gets the respective key from the game data to move the player in specific direction
-        if (Input.GetKey(GameData.rightKey))
-        {
-            move = transform.TransformDirection(Vector3.right);
-            controller.Move(move * maxSpeed * Time.deltaTime);
-        }
-        if (Input.GetKey(GameData.leftKey))
-        {
-            move = transform.TransformDirection(Vector3.left);
-            controller.Move(move * maxSpeed * Time.deltaTime);
-        }
-        if (Input.GetKey(GameData.forwardKey))
-        {
-            move = transform.TransformDirection(Vector3.forward);
-            controller.Move(move * maxSpeed * Time.deltaTime);
-        }
-        if (Input.GetKey(GameData.backKey))
-        {
-            move = transform.TransformDirection(Vector3.back);
-            controller.Move(move * maxSpeed * Time.deltaTime);
-        }
+        //if (Input.GetKey(GameData.rightKey))
+        //{
+        //    move = transform.TransformDirection(Vector3.right);
+        //    controller.Move(move * maxSpeed * Time.deltaTime);
+        //}
+        //if (Input.GetKey(GameData.leftKey))
+        //{
+        //    move = transform.TransformDirection(Vector3.left);
+        //    controller.Move(move * maxSpeed * Time.deltaTime);
+        //}
+        //if (Input.GetKey(GameData.forwardKey))
+        //{
+        //    move = transform.TransformDirection(Vector3.forward);
+        //    controller.Move(move * maxSpeed * Time.deltaTime);
+        //}
+        //if (Input.GetKey(GameData.backKey))
+        //{
+        //    move = transform.TransformDirection(Vector3.back);
+        //    controller.Move(move * maxSpeed * Time.deltaTime);
+        //}
+
+        float x = joystick.Horizontal;
+        float z = joystick.Vertical;
+
+        Vector3 move = transform.right * x + transform.forward * z;
+
+        controller.Move(move * maxSpeed * Time.deltaTime);
 
         // getting the user selected jump key to increase the y coordinate of the player object
-        if (Input.GetKey(GameData.jumpKey) && isGrounded)
-        {
-            velocity.y = Mathf.Sqrt(jumpHeight * -2.0f * gravity);
-        }
+        //if (Input.GetKey(GameData.jumpKey) && isGrounded)
+        //{
+        //    Jump()
+        //}
 
         velocity.y += gravity * Time.deltaTime;
 
@@ -125,7 +136,18 @@ public class PlayerBehaviour : MonoBehaviour
         if (GameData.playerHealth < 0)
         {
             SceneManager.LoadScene(2);
-            Cursor.lockState = CursorLockMode.None;
+            //Cursor.lockState = CursorLockMode.None;
         }
     }
+
+    // increases the players y coordinates to make him jump
+    public void Jump()
+    {
+        if (isGrounded)
+        {
+            velocity.y = Mathf.Sqrt(jumpHeight * -2.0f * gravity);
+        }
+    }
+
+
 }
