@@ -25,6 +25,8 @@ public class GameController : MonoBehaviour
     public GameObject uiPisAmmo;
     public GameObject ammo;
     public GameObject uiAid;
+    public GameObject rifle;
+    public GameObject pistol;
 
     [Header("Player Settings")]
     public PlayerBehaviour player;
@@ -197,6 +199,31 @@ public class GameController : MonoBehaviour
     public void onPauseButtonPressed()
     {
         pauseGame();
+    }
+
+    public void SelectRifle()
+    {
+        Debug.Log("Rifle Selected");
+        GameData.gunActive = 1;
+        rifle.SetActive(true);
+        pistol.SetActive(false);
+    }
+
+    public void SelectPistol()
+    {
+        Debug.Log("Pistol Selected");
+        GameData.gunActive = 2;
+        rifle.SetActive(false);
+        pistol.SetActive(true);
+    }
+
+    public void UseMedkit()
+    {
+        if (GameData.aidKits != 0)
+        {
+            GameData.aidKits--;
+            GameData.playerHealth += 50;
+        }
     }
 
     public void loadGame()

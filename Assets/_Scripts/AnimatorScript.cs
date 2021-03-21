@@ -15,6 +15,9 @@ public class AnimatorScript : MonoBehaviour
     public LayerMask groundMask;
     public bool isGrounded;
 
+    [Header("Player Animations")]
+    public Joystick joystick;
+
     public Animator animator;
     // Start is called before the first frame update
     void Start()
@@ -25,22 +28,34 @@ public class AnimatorScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(GameData.rightKey) && isGrounded)
+        // animations for the WebGl
+        //if (Input.GetKey(GameData.rightKey) && isGrounded)
+        //{
+        //    animator.SetBool("Stopped", false);
+        //}
+        //else if (Input.GetKey(GameData.leftKey) && isGrounded)
+        //{
+        //    animator.SetBool("Stopped", false);
+        //}
+        //else if (Input.GetKey(GameData.forwardKey) && isGrounded)
+        //{
+        //    animator.SetBool("Stopped", false);
+        //}
+        //else if (Input.GetKey(GameData.backKey) && isGrounded)
+        //{
+        //    animator.SetBool("Stopped", false);
+        //}
+        //else
+        //{
+        //    animator.SetBool("Stopped", true);
+        //}
+
+        animator.SetInteger("gunActive", GameData.gunActive);
+
+        if ((joystick.Horizontal != 0 || joystick.Vertical != 0) && isGrounded)
         {
             animator.SetBool("Stopped", false);
-        }
-        else if (Input.GetKey(GameData.leftKey) && isGrounded)
-        {
-            animator.SetBool("Stopped", false);
-        }
-        else if (Input.GetKey(GameData.forwardKey) && isGrounded)
-        {
-            animator.SetBool("Stopped", false);
-        }
-        else if (Input.GetKey(GameData.backKey) && isGrounded)
-        {
-            animator.SetBool("Stopped", false);
-        }
+        } 
         else
         {
             animator.SetBool("Stopped", true);
