@@ -24,6 +24,8 @@ public class GameController : MonoBehaviour
     public GameObject uiPisAmmo;
     public GameObject ammo;
     public GameObject uiAid;
+    public GameObject rifle;
+    public GameObject pistol;
     // Start is called before the first frame update
     void Start()
     {
@@ -186,12 +188,16 @@ public class GameController : MonoBehaviour
     {
         Debug.Log("Rifle Selected");
         GameData.gunActive = 1;
+        rifle.SetActive(true);
+        pistol.SetActive(false);
     }
 
     public void SelectPistol()
     {
         Debug.Log("Pistol Selected");
         GameData.gunActive = 2;
+        rifle.SetActive(false);
+        pistol.SetActive(true);
     }
 
     public void UseMedkit()
