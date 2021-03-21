@@ -13,6 +13,7 @@ using System.IO;
  */
 public class GameController : MonoBehaviour
 {
+    public int numOfDarkSeekers = 6;
     public GameObject pauseMenu;
     public GameObject inventory;
     public GameObject completion;
@@ -24,9 +25,25 @@ public class GameController : MonoBehaviour
     public GameObject uiPisAmmo;
     public GameObject ammo;
     public GameObject uiAid;
+
+    [Header("Player Settings")]
+    public PlayerBehaviour player;
+    public CameraController playerCamera;
+
+    [Header("Dark Seeker Settings")]
+    public DarkSeekerBehaviour[] darkseekers;
+
+    [Header("Scene Data")]
+    public SceneDataSO sceneData;
+
+
     // Start is called before the first frame update
     void Start()
     {
+
+        player = FindObjectOfType<PlayerBehaviour>();
+        darkseekers = FindObjectsOfType<DarkSeekerBehaviour>();
+        playerCamera = FindObjectOfType<CameraController>();
         Time.timeScale = 1f;
     }
 
@@ -109,8 +126,7 @@ public class GameController : MonoBehaviour
     {
         // getting the player, enemies game objects
         PlayerBehaviour playerBehaviour = FindObjectOfType<PlayerBehaviour>();
-        DarkSeekerBehaviour[] darkseekers = FindObjectsOfType<DarkSeekerBehaviour>();
-        DarkSeekerObject[] darkseekersSaveArray = new DarkSeekerObject[6];
+        DarkSeekerObject[] darkseekersSaveArray = new DarkSeekerObject[numOfDarkSeekers];
 
         for(int i = 0; i < darkseekers.Length; i++)
         {
@@ -175,10 +191,59 @@ public class GameController : MonoBehaviour
     public void pauseGame()
     {
         pauseMenu.SetActive(true);
+        Time.timeScale = 0f;
     }
 
     public void onPauseButtonPressed()
     {
         pauseGame();
+    }
+
+    public void loadGame()
+    {
+        //Player Data
+        player.controller.enabled = false;
+        player.transform.position = sceneData.playerPosition;
+        player.transform.rotation = sceneData.playerRotation;
+        GameData.goals = sceneData.cures;
+        DarkSeekerObject[] darkseekersSaveArray = new DarkSeekerObject[numOfDarkSeekers];
+
+        for (int i = 0; i < darkseekers.Length; i++)
+        {
+            darkseekers[i].transform.position = sceneData.darkSeekersPosition[i];
+        }
+
+        player.controller.enabled = true;
+
+        player.health = sceneData.playerHealth;
+        player.playerHealthBar.SetHealth(sceneData.playerHealth);
+
+
+    }
+
+    public void onLoadButtonPressed()
+    {
+        loadGame();
+    }
+
+    public void saveGame()
+    {
+        //player saving data
+        sceneData.playerPosition = player.transform.position;
+        sceneData.playerHealth = player.health;
+        sceneData.playerRotation = player.transform.rotation;
+        sceneData.cures = GameData.goals;
+        //enemy saving data
+        DarkSeekerObject[] darkseekersSaveArray = new DarkSeekerObject[numOfDarkSeekers];
+        sceneData.darkSeekersPosition = new Vector3[darkseekersSaveArray.Length];
+        for (int i = 0; i < darkseekers.Length; i++)
+        {
+            sceneData.darkSeekersPosition[i] = darkseekers[i].transform.position;
+        }
+    }
+
+    public void onSaveButtonPressed()
+    {
+        saveGame();
     }
 }

@@ -45,7 +45,11 @@ public class HealthBarScreenSpaceController : MonoBehaviour
             healthBarSlider.value = 0;
         }
     }
-
+    public void SetHealth(int health)
+    {
+        healthBarSlider.value = health;
+        currentHealth = health;
+    }
     public void Reset()
     {
         currentHealth = maximumHealth;
