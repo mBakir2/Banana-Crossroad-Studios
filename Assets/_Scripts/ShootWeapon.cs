@@ -39,9 +39,10 @@ public class ShootWeapon : MonoBehaviour
         if (GameData.gunActive == 1)
         {
             bullet = new RifleBullet();
+            Debug.Log(rifleBulletPrefab);
             bulletObject = Instantiate(rifleBulletPrefab);
-            bullet.ShootBulletFromSpawnPoint(bulletObject, bulletSpawnPoint, transform);
             rifleGunshotAudioSource.Play();
+            bullet.ShootBulletFromSpawnPoint(bulletObject, bulletSpawnPoint, transform);
             StartCoroutine(DestroyBulletAfterSpecifiedTime(bulletObject, bullet.lifetime));
             //bulletType.GetComponent<Rigidbody>().AddForce(bulletSpawnPoint.forward * bullet.speed, ForceMode.Impulse);
         } 
@@ -49,9 +50,12 @@ public class ShootWeapon : MonoBehaviour
         {
             bullet = new PistolBullet();
             bulletObject = Instantiate(pistolBulletPrefab);
-            bullet.ShootBulletFromSpawnPoint(bulletObject, bulletSpawnPoint, transform);
             gunshotAudioSource.Play();
-            StartCoroutine(DestroyBulletAfterSpecifiedTime(bulletObject, bullet.lifetime));
+            if (bulletObject)
+            {
+                bullet.ShootBulletFromSpawnPoint(bulletObject, bulletSpawnPoint, transform);
+                StartCoroutine(DestroyBulletAfterSpecifiedTime(bulletObject, bullet.lifetime));
+            }
             //bulletType.GetComponent<Rigidbody>().AddForce(bulletSpawnPoint.forward * bullet.speed, ForceMode.Impulse);
         }
 
