@@ -59,6 +59,7 @@ public class GameController : MonoBehaviour
 
         if (GameData.loadFromMainMenu)
         {
+            Debug.Log("Loading the game");
             loadGame();
         }
     }
@@ -256,7 +257,7 @@ public class GameController : MonoBehaviour
         player.transform.rotation = sceneData.playerRotation;
         GameData.goals = sceneData.cures;
 
-        /*
+
         DarkSeekerBehaviour[] darkseekersInScene = FindObjectsOfType<DarkSeekerBehaviour>();
 
         for (int i = 0; i < darkseekersInScene.Length; i++)
@@ -266,31 +267,31 @@ public class GameController : MonoBehaviour
             darkseekersInScene[i].health = sceneData.enemyHealth[i];
             darkseekersInScene[i].enemyHealthBar.SetHealth(sceneData.enemyHealth[i]);
         }
-        */
+
 
         // semi code for instantiating instead of moving existing items
 
         //destroy all pickups and reinstantiate existing pickups on load
         //destroys
-        DarkSeekerBehaviour[] darkseekersInScene = FindObjectsOfType<DarkSeekerBehaviour>();
-        for (int i = 0; i < darkseekersInScene.Length; i++)
-        {
-            Destroy(darkseekersInScene[i]);
-        }
+        //DarkSeekerBehaviour[] darkseekersInScene = FindObjectsOfType<DarkSeekerBehaviour>();
+        //for (int i = 0; i < darkseekersInScene.Length; i++)
+        //{
+        //    Destroy(darkseekersInScene[i]);
+        //}
 
-        //instantiates
-        for (int i = 0; i < sceneData.darkSeekersPosition.Length; i++)
-        {
-            Instantiate(darkseekerPrefab, sceneData.darkSeekersPosition[i], sceneData.enemyRotation[i]);
-        }
+        ////instantiates
+        //for (int i = 0; i < sceneData.darkSeekersPosition.Length; i++)
+        //{
+        //    Instantiate(darkseekerPrefab, sceneData.darkSeekersPosition[i], sceneData.enemyRotation[i]);
+        //}
 
-        darkseekersInScene = FindObjectsOfType<DarkSeekerBehaviour>();
+        //darkseekersInScene = FindObjectsOfType<DarkSeekerBehaviour>();
 
-        for (int i = 0; i < darkseekersInScene.Length; i++)
-        {
-            darkseekersInScene[i].health = sceneData.enemyHealth[i];
-            darkseekersInScene[i].enemyHealthBar.SetHealth(sceneData.enemyHealth[i]);
-        }
+        //for (int i = 0; i < darkseekersInScene.Length; i++)
+        //{
+        //    darkseekersInScene[i].health = sceneData.enemyHealth[i];
+        //    darkseekersInScene[i].enemyHealthBar.SetHealth(sceneData.enemyHealth[i]);
+        //}
         //
 
         //destroy all pickups and reinstantiate existing pickups on load
