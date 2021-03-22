@@ -1,23 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/**
+ * Authors: Anmoldeep Singh Gill
+ *          Chadwick Lapis
+ *          Mohammad Bakir
+ * Last Modified on: 21th Mar 2020
+ */
 public class RifleBulletBehaviour : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("Hit the object: " + other.gameObject.name);
         if (other.gameObject.CompareTag("Enemy"))
         {
-            Debug.Log("Hit the object: " + other.gameObject.name);
-            StartCoroutine(DestroyBulletAfterSpecifiedTime(gameObject, 2));
             other.gameObject.GetComponent<DarkSeekerBehaviour>().TakeDamage(10);
         }
-    }
-
-    private IEnumerator DestroyBulletAfterSpecifiedTime(GameObject bullet, float delay)
-    {
-        yield return new WaitForSeconds(delay);
-
-        Destroy(bullet);
     }
 }

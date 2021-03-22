@@ -9,7 +9,7 @@ using System.IO;
  * Authors: Anmoldeep Singh Gill
  *          Chadwick Lapis
  *          Mohammad Bakir
- * Last Modified on: 9th Mar 2020
+ * Last Modified on: 21th Mar 2020
  */
 public class GameController : MonoBehaviour
 {
@@ -222,7 +222,14 @@ public class GameController : MonoBehaviour
         if (GameData.aidKits != 0)
         {
             GameData.aidKits--;
-            GameData.playerHealth += 50;
+            if (GameData.playerHealth > 50)
+            {
+                GameData.playerHealth = 100;
+            }
+            else
+            {
+                GameData.playerHealth += 50;
+            }
         }
     }
 
