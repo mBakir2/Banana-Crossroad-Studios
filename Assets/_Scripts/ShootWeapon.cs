@@ -1,7 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/**
+ * Authors: Anmoldeep Singh Gill
+ *          Chadwick Lapis
+ *          Mohammad Bakir
+ * Last Modified on: 21th Mar 2020
+ */
 public class ShootWeapon : MonoBehaviour
 {
     [Header("Bullet Properties")]
@@ -36,26 +41,24 @@ public class ShootWeapon : MonoBehaviour
         Bullet bullet;
         GameObject bulletObject;
 
-        if (GameData.gunActive == 1)
+        if (GameData.gunActive == 1 && GameData.ammoRifle > 0)
         {
             bullet = new RifleBullet();
-            Debug.Log(rifleBulletPrefab);
             bulletObject = Instantiate(rifleBulletPrefab);
             rifleGunshotAudioSource.Play();
             bullet.ShootBulletFromSpawnPoint(bulletObject, bulletSpawnPoint, transform);
             StartCoroutine(DestroyBulletAfterSpecifiedTime(bulletObject, bullet.lifetime));
+            GameData.ammoRifle--;
             //bulletType.GetComponent<Rigidbody>().AddForce(bulletSpawnPoint.forward * bullet.speed, ForceMode.Impulse);
         } 
-        else if (GameData.gunActive == 2)
+        else if (GameData.gunActive == 2 && GameData.ammoPistol > 0)
         {
             bullet = new PistolBullet();
             bulletObject = Instantiate(pistolBulletPrefab);
             gunshotAudioSource.Play();
-            if (bulletObject)
-            {
-                bullet.ShootBulletFromSpawnPoint(bulletObject, bulletSpawnPoint, transform);
-                StartCoroutine(DestroyBulletAfterSpecifiedTime(bulletObject, bullet.lifetime));
-            }
+            bullet.ShootBulletFromSpawnPoint(bulletObject, bulletSpawnPoint, transform);
+            StartCoroutine(DestroyBulletAfterSpecifiedTime(bulletObject, bullet.lifetime));
+            GameData.ammoPistol--;
             //bulletType.GetComponent<Rigidbody>().AddForce(bulletSpawnPoint.forward * bullet.speed, ForceMode.Impulse);
         }
 

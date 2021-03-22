@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
  * Authors: Anmoldeep Singh Gill
  *          Chadwick Lapis
  *          Mohammad Bakir
- * Last Modified on: 8th Mar 2020
+ * Last Modified on: 21th Mar 2020
  */
 public class PlayerBehaviour : MonoBehaviour
 {
@@ -42,7 +42,7 @@ public class PlayerBehaviour : MonoBehaviour
     void Start()
     {
         controller = GetComponent<CharacterController>();
-        GameData.playerHealth = health;
+        //GameData.playerHealth = health;
     }
 
     // Update is called once per frame
@@ -120,6 +120,8 @@ public class PlayerBehaviour : MonoBehaviour
         //    }
         //}
 
+        playerHealthBar.SetHealth(GameData.playerHealth);
+
     }
 
     void OnDrawGizmos()
@@ -130,8 +132,9 @@ public class PlayerBehaviour : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        health -= damage;
-        GameData.playerHealth = health;
+        //health -= damage;
+        //GameData.playerHealth = health;
+        GameData.playerHealth -= damage;
         playerHealthBar.TakeDamage(damage);
         attackSound.Play();
         if (GameData.playerHealth < 0)

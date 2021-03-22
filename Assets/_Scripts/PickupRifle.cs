@@ -5,7 +5,7 @@ using UnityEngine;
  * Authors: Anmoldeep Singh Gill
  *          Chadwick Lapis
  *          Mohammad Bakir
- * Last Modified on: 8th Mar 2020
+ * Last Modified on: 21th Mar 2020
  */
 public class PickupRifle : MonoBehaviour
 {
@@ -28,6 +28,10 @@ public class PickupRifle : MonoBehaviour
             Destroy(gameObject);
             GameData.hasRifle = true;
             GameData.ammoRifle += 60;
+            if (GameData.gunActive == 0)
+            {
+                GameData.gunActive = 1;
+            }
         }
     }
 }
