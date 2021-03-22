@@ -256,7 +256,7 @@ public class GameController : MonoBehaviour
         player.transform.rotation = sceneData.playerRotation;
         GameData.goals = sceneData.cures;
 
-        /*
+        //
         DarkSeekerBehaviour[] darkseekersInScene = FindObjectsOfType<DarkSeekerBehaviour>();
 
         for (int i = 0; i < darkseekersInScene.Length; i++)
@@ -266,12 +266,13 @@ public class GameController : MonoBehaviour
             darkseekersInScene[i].health = sceneData.enemyHealth[i];
             darkseekersInScene[i].enemyHealthBar.SetHealth(sceneData.enemyHealth[i]);
         }
-        */
+        //
 
         // semi code for instantiating instead of moving existing items
 
         //destroy all pickups and reinstantiate existing pickups on load
         //destroys
+        /*
         DarkSeekerBehaviour[] darkseekersInScene = FindObjectsOfType<DarkSeekerBehaviour>();
         for (int i = 0; i < darkseekersInScene.Length; i++)
         {
@@ -288,10 +289,9 @@ public class GameController : MonoBehaviour
 
         for (int i = 0; i < darkseekersInScene.Length; i++)
         {
-            darkseekersInScene[i].health = sceneData.enemyHealth[i];
             darkseekersInScene[i].enemyHealthBar.SetHealth(sceneData.enemyHealth[i]);
         }
-        //
+        */
 
         //destroy all pickups and reinstantiate existing pickups on load
         //destroys

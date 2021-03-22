@@ -101,11 +101,17 @@ public class DarkSeekerBehaviour : MonoBehaviour
         {
             health -= damage;
             enemyHealthBar.TakeDamage(damage);
-        } 
+        }
         else
         {
             health = 0;
         }
+    }
+
+    public void SetHealth(int SaveHealth)
+    {
+        health = SaveHealth;
+        enemyHealthBar.SetHealth(SaveHealth);
     }
 
     private IEnumerator DestroyEnemyAfterSpecifiedTime(GameObject enemy, float delay)
