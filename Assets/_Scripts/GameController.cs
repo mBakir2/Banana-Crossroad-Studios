@@ -24,6 +24,9 @@ public class GameController : MonoBehaviour
     public GameObject uiPisAmmo;
     public GameObject ammo;
     public GameObject uiAid;
+    public GameObject uirifle;
+    public GameObject uipistol;
+
     public GameObject rifle;
     public GameObject pistol;
 
@@ -33,10 +36,17 @@ public class GameController : MonoBehaviour
 
     [Header("Dark Seeker Settings")]
     public DarkSeekerBehaviour[] darkseekers;
+    public GameObject darkseekerPrefab;
 
     [Header("Scene Data")]
     public SceneDataSO sceneData;
 
+    [Header("Prefabs to instantiate on Load")]
+    public GameObject goalPref;
+    public GameObject pistolPref;
+    public GameObject riflePref;
+    public GameObject ammoPref;
+    public GameObject firstAidPref;
 
     // Start is called before the first frame update
     void Start()
@@ -46,6 +56,11 @@ public class GameController : MonoBehaviour
         darkseekers = FindObjectsOfType<DarkSeekerBehaviour>();
         playerCamera = FindObjectOfType<CameraController>();
         Time.timeScale = 1f;
+
+        if (GameData.loadFromMainMenu)
+        {
+            loadGame();
+        }
     }
 
     // Update is called once per frame
@@ -240,7 +255,9 @@ public class GameController : MonoBehaviour
         player.transform.position = sceneData.playerPosition;
         player.transform.rotation = sceneData.playerRotation;
         GameData.goals = sceneData.cures;
-        DarkSeekerBehaviour[] darkseekersInScene = GetComponents<DarkSeekerBehaviour>();
+
+        /*
+        DarkSeekerBehaviour[] darkseekersInScene = FindObjectsOfType<DarkSeekerBehaviour>();
 
         for (int i = 0; i < darkseekersInScene.Length; i++)
         {
@@ -249,11 +266,91 @@ public class GameController : MonoBehaviour
             darkseekersInScene[i].health = sceneData.enemyHealth[i];
             darkseekersInScene[i].enemyHealthBar.SetHealth(sceneData.enemyHealth[i]);
         }
+        */
+
+        // semi code for instantiating instead of moving existing items
+
+        //destroy all pickups and reinstantiate existing pickups on load
+        //destroys
+        DarkSeekerBehaviour[] darkseekersInScene = FindObjectsOfType<DarkSeekerBehaviour>();
+        for (int i = 0; i < darkseekersInScene.Length; i++)
+        {
+            Destroy(darkseekersInScene[i]);
+        }
+
+        //instantiates
+        for (int i = 0; i < sceneData.darkSeekersPosition.Length; i++)
+        {
+            Instantiate(darkseekerPrefab, sceneData.darkSeekersPosition[i], sceneData.enemyRotation[i]);
+        }
+
+        darkseekersInScene = FindObjectsOfType<DarkSeekerBehaviour>();
+
+        for (int i = 0; i < darkseekersInScene.Length; i++)
+        {
+            darkseekersInScene[i].health = sceneData.enemyHealth[i];
+            darkseekersInScene[i].enemyHealthBar.SetHealth(sceneData.enemyHealth[i]);
+        }
+        //
+
+        //destroy all pickups and reinstantiate existing pickups on load
+        //destroys
+        
+        PickupRifle[] rifles = FindObjectsOfType<PickupRifle>();
+        PickupPistol[] pistols = FindObjectsOfType<PickupPistol>();
+        PickupFirstAid[] firstAids = FindObjectsOfType<PickupFirstAid>();
+        PickupAmmo[] ammos = FindObjectsOfType<PickupAmmo>();
+        Goal[] goals = FindObjectsOfType<Goal>();
+
+        for (int i = 0; i < rifles.Length; i++)
+        {
+            Destroy(rifles[i].gameObject);
+        }
+        for (int i = 0; i < pistols.Length; i++)
+        {
+            Destroy(pistols[i].gameObject);
+        }
+        for (int i = 0; i < firstAids.Length; i++)
+        {
+            Destroy(firstAids[i].gameObject);
+        }
+        for (int i = 0; i < ammos.Length; i++)
+        {
+            Destroy(ammos[i].gameObject);
+        }
+        for (int i = 0; i < goals.Length; i++)
+        {
+            Destroy(goals[i].gameObject);
+        }
+        
+
+        //instantiates new pickups
+        for (int i = 0; i < sceneData.riflePickup.Length; i++)
+        {
+            Instantiate(riflePref, sceneData.riflePickup[i], new Quaternion());
+        }
+        for (int i = 0; i < sceneData.pistolPickup.Length; i++)
+        {
+            Instantiate(pistolPref, sceneData.pistolPickup[i], new Quaternion());
+        }
+        for (int i = 0; i < sceneData.firstAidsPickup.Length; i++)
+        {
+            Instantiate(firstAidPref, sceneData.firstAidsPickup[i], new Quaternion());
+        }
+        for (int i = 0; i < sceneData.ammoPickup.Length; i++)
+        {
+            Instantiate(ammoPref, sceneData.ammoPickup[i], new Quaternion());
+        }
+        for (int i = 0; i < sceneData.goalsPickup.Length; i++)
+        {
+            Instantiate(goalPref, sceneData.goalsPickup[i], new Quaternion());
+        }
 
         player.controller.enabled = true;
 
         player.health = sceneData.playerHealth;
         player.playerHealthBar.SetHealth(sceneData.playerHealth);
+        GameData.playerHealth = sceneData.playerHealth;
         GameData.hasPistol = sceneData.hasPistol;
         GameData.hasRifle = sceneData.hasRifle;
         GameData.gunActive = sceneData.gunActive;
@@ -268,11 +365,11 @@ public class GameController : MonoBehaviour
     {
         //player saving data
         sceneData.playerPosition = player.transform.position;
-        sceneData.playerHealth = player.health;
+        sceneData.playerHealth = GameData.playerHealth;
         sceneData.playerRotation = player.transform.rotation;
         sceneData.cures = GameData.goals;
 
-        DarkSeekerBehaviour[] darkseekersInScene = GetComponents<DarkSeekerBehaviour>();
+        DarkSeekerBehaviour[] darkseekersInScene = FindObjectsOfType<DarkSeekerBehaviour>();
         //enemy saving data
         sceneData.darkSeekersPosition = new Vector3[darkseekersInScene.Length];
         sceneData.enemyRotation = new Quaternion[darkseekersInScene.Length];
@@ -283,6 +380,40 @@ public class GameController : MonoBehaviour
             sceneData.darkSeekersPosition[i] = darkseekersInScene[i].transform.position;
             sceneData.enemyRotation[i] = darkseekersInScene[i].transform.rotation;
             sceneData.enemyHealth[i] = darkseekersInScene[i].health;
+        }
+
+        //pickups goal data
+        PickupRifle[] rifles = FindObjectsOfType<PickupRifle>();
+        PickupPistol[] pistols = FindObjectsOfType<PickupPistol>();
+        PickupFirstAid[] firstAids = FindObjectsOfType<PickupFirstAid>();
+        PickupAmmo[] ammos = FindObjectsOfType<PickupAmmo>();
+        Goal[] goals = FindObjectsOfType<Goal>();
+
+        sceneData.riflePickup = new Vector3[rifles.Length];
+        sceneData.pistolPickup = new Vector3[pistols.Length];
+        sceneData.firstAidsPickup = new Vector3[firstAids.Length];
+        sceneData.ammoPickup = new Vector3[ammos.Length];
+        sceneData.goalsPickup = new Vector3[goals.Length];
+
+        for (int i = 0; i < rifles.Length; i++)
+        {
+            sceneData.riflePickup[i] = rifles[i].transform.position;
+        }
+        for (int i = 0; i < pistols.Length; i++)
+        {
+            sceneData.pistolPickup[i] = pistols[i].transform.position;
+        }
+        for (int i = 0; i < firstAids.Length; i++)
+        {
+            sceneData.firstAidsPickup[i] = firstAids[i].transform.position;
+        }
+        for (int i = 0; i < ammos.Length; i++)
+        {
+            sceneData.ammoPickup[i] = ammos[i].transform.position;
+        }
+        for (int i = 0; i < goals.Length; i++)
+        {
+            sceneData.goalsPickup[i] = goals[i].transform.position;
         }
 
         sceneData.hasPistol = GameData.hasPistol;
