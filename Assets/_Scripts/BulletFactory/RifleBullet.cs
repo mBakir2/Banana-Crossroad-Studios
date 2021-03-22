@@ -7,7 +7,7 @@ public class RifleBullet : Bullet
 
     public RifleBullet()
     {
-        this.speed = 23;
+        this.speed = 18;
         this.lifetime = 3;
     }
 

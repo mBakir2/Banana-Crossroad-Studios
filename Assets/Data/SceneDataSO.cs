@@ -10,10 +10,14 @@ public class SceneDataSO : ScriptableObject
     public Quaternion playerRotation;
     public int playerHealth;
     public int cures;
+    public bool hasPistol;
+    public bool hasRifle;
+    public int gunActive;
 
     // Enemy Data
     [Header("Enemy Data")]
     public Vector3[] darkSeekersPosition;
-    public Quaternion enemyRotation;
-    public int enemyHealth;
+    public Quaternion[] enemyRotation;
+    public int[] enemyHealth;
+
 }
