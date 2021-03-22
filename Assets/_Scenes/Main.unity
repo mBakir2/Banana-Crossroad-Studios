@@ -14503,7 +14503,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18deb721fe6b97c48a455210e3347df1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numOfDarkSeekers: 6
   pauseMenu: {fileID: 1947362504}
   inventory: {fileID: 1217808924}
   completion: {fileID: 354537539}
@@ -14515,12 +14514,20 @@ MonoBehaviour:
   uiPisAmmo: {fileID: 2042551374}
   ammo: {fileID: 1652088160}
   uiAid: {fileID: 238271813}
+  uirifle: {fileID: 0}
+  uipistol: {fileID: 0}
   rifle: {fileID: 6286815474415532859}
   pistol: {fileID: 1553664333}
   player: {fileID: 0}
   playerCamera: {fileID: 0}
   darkseekers: []
+  darkseekerPrefab: {fileID: 4229339232663016376, guid: 4a9957a2f1f287c46ae1384ed44861cf, type: 3}
   sceneData: {fileID: 11400000, guid: c735d3a5dd84cc04791855bbc190027e, type: 2}
+  goalPref: {fileID: 5376672171898650219, guid: b554062fa5d2e1c48865052206ef7f8e, type: 3}
+  pistolPref: {fileID: 2991889336014222081, guid: 36a655774f1d208408cef335f3ea5ae7, type: 3}
+  riflePref: {fileID: 3373341323921422436, guid: 5b5594d96bc591b43b06bef861d7acd7, type: 3}
+  ammoPref: {fileID: 5142248624848462019, guid: ad34a8e5448453c4780af0abd17fcae8, type: 3}
+  firstAidPref: {fileID: 2702011768426016614, guid: f6330cc5edc16b345a50f778e3ae6a0a, type: 3}
 --- !u!4 &1806633473
 Transform:
   m_ObjectHideFlags: 0

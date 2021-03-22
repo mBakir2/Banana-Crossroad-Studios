@@ -20,4 +20,11 @@ public class SceneDataSO : ScriptableObject
     public Quaternion[] enemyRotation;
     public int[] enemyHealth;
 
+    //Pickups Goal Data
+    public Vector3[] riflePickup;
+    public Vector3[] pistolPickup;
+    public Vector3[] goalsPickup;
+    public Vector3[] firstAidsPickup;
+    public Vector3[] ammoPickup;
+
 }
