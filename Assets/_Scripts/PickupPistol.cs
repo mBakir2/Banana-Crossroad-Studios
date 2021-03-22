@@ -5,7 +5,7 @@ using UnityEngine;
  * Authors: Anmoldeep Singh Gill
  *          Chadwick Lapis
  *          Mohammad Bakir
- * Last Modified on: 8th Mar 2020
+ * Last Modified on: 21th Mar 2020
  */
 public class PickupPistol : MonoBehaviour
 {
@@ -28,6 +28,10 @@ public class PickupPistol : MonoBehaviour
             Destroy(gameObject);
             GameData.hasPistol = true;
             GameData.ammoPistol += 60;
+            if (GameData.gunActive == 0)
+            {
+                GameData.gunActive = 2;
+            }
         }
     }
 }
