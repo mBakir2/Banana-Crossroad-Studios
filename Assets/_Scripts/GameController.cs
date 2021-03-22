@@ -13,7 +13,6 @@ using System.IO;
  */
 public class GameController : MonoBehaviour
 {
-    public int numOfDarkSeekers = 6;
     public GameObject pauseMenu;
     public GameObject inventory;
     public GameObject completion;
@@ -124,47 +123,47 @@ public class GameController : MonoBehaviour
     }
 
     // saves the game by making a save.json file
-    public void SaveGame()
-    {
-        // getting the player, enemies game objects
-        PlayerBehaviour playerBehaviour = FindObjectOfType<PlayerBehaviour>();
-        DarkSeekerObject[] darkseekersSaveArray = new DarkSeekerObject[numOfDarkSeekers];
+    //public void SaveGame()
+    //{
+    //    // getting the player, enemies game objects
+    //    PlayerBehaviour playerBehaviour = FindObjectOfType<PlayerBehaviour>();
+    //    DarkSeekerObject[] darkseekersSaveArray = new DarkSeekerObject[numOfDarkSeekers];
 
-        for(int i = 0; i < darkseekers.Length; i++)
-        {
-            darkseekersSaveArray[i] = new DarkSeekerObject
-            {
-                name = darkseekers[i].gameObject.name,
-                position = darkseekers[i].transform.position
-            };
-            Debug.Log(darkseekers[i].gameObject.name);
-            Debug.Log(darkseekers[i].transform.position);
-        }
+    //    for(int i = 0; i < darkseekers.Length; i++)
+    //    {
+    //        darkseekersSaveArray[i] = new DarkSeekerObject
+    //        {
+    //            name = darkseekers[i].gameObject.name,
+    //            position = darkseekers[i].transform.position
+    //        };
+    //        Debug.Log(darkseekers[i].gameObject.name);
+    //        Debug.Log(darkseekers[i].transform.position);
+    //    }
 
-        // making the save object with all the data
-        SaveObject saveObj = new SaveObject {
-            playerPosition = playerBehaviour.transform.position,
-            playerHealth = GameData.playerHealth,
-            enemies = darkseekersSaveArray,
-            win = GameData.win,
-            goals = GameData.goals,
-            hasRifle = GameData.hasRifle,
-            hasPistol = GameData.hasPistol,
-            ammoRifle = GameData.ammoRifle,
-            ammoPistol = GameData.ammoPistol,
-            gunActive = GameData.gunActive,
-            aidKits = GameData.aidKits
-        };
+    //    // making the save object with all the data
+    //    SaveObject saveObj = new SaveObject {
+    //        playerPosition = playerBehaviour.transform.position,
+    //        playerHealth = GameData.playerHealth,
+    //        enemies = darkseekersSaveArray,
+    //        win = GameData.win,
+    //        goals = GameData.goals,
+    //        hasRifle = GameData.hasRifle,
+    //        hasPistol = GameData.hasPistol,
+    //        ammoRifle = GameData.ammoRifle,
+    //        ammoPistol = GameData.ammoPistol,
+    //        gunActive = GameData.gunActive,
+    //        aidKits = GameData.aidKits
+    //    };
 
-        // using JsonUtility to serealise the save object to JSON
-        string json = JsonUtility.ToJson(saveObj, true);
+    //    // using JsonUtility to serealise the save object to JSON
+    //    string json = JsonUtility.ToJson(saveObj, true);
 
-        Debug.Log(json);
+    //    Debug.Log(json);
 
-        // making a new file and writing the json data
-        // temporary commenting the saving beacuse of an error while playing on deployed site
-        File.WriteAllText(Application.dataPath + "/SaveData/saveGame1.json", json);
-    }
+    //    // making a new file and writing the json data
+    //    // temporary commenting the saving beacuse of an error while playing on deployed site
+    //    File.WriteAllText(Application.dataPath + "/SaveData/saveGame1.json", json);
+    //}
 
     // save object stores all the save data for the game
     private class SaveObject
@@ -184,10 +183,11 @@ public class GameController : MonoBehaviour
 
     // class to store the enemy names and positions
     [System.Serializable]
-    private class DarkSeekerObject
+    public class DarkSeekerObject
     {
         public string name;
         public Vector3 position;
+        public int health;
     }
 
     public void pauseGame()
@@ -240,19 +240,23 @@ public class GameController : MonoBehaviour
         player.transform.position = sceneData.playerPosition;
         player.transform.rotation = sceneData.playerRotation;
         GameData.goals = sceneData.cures;
-        DarkSeekerObject[] darkseekersSaveArray = new DarkSeekerObject[numOfDarkSeekers];
+        DarkSeekerBehaviour[] darkseekersInScene = GetComponents<DarkSeekerBehaviour>();
 
-        for (int i = 0; i < darkseekers.Length; i++)
+        for (int i = 0; i < darkseekersInScene.Length; i++)
         {
-            darkseekers[i].transform.position = sceneData.darkSeekersPosition[i];
+            darkseekersInScene[i].transform.position = sceneData.darkSeekersPosition[i];
+            darkseekersInScene[i].transform.rotation = sceneData.enemyRotation[i];
+            darkseekersInScene[i].health = sceneData.enemyHealth[i];
+            darkseekersInScene[i].enemyHealthBar.SetHealth(sceneData.enemyHealth[i]);
         }
 
         player.controller.enabled = true;
 
         player.health = sceneData.playerHealth;
         player.playerHealthBar.SetHealth(sceneData.playerHealth);
-
-
+        GameData.hasPistol = sceneData.hasPistol;
+        GameData.hasRifle = sceneData.hasRifle;
+        GameData.gunActive = sceneData.gunActive;
     }
 
     public void onLoadButtonPressed()
@@ -267,13 +271,23 @@ public class GameController : MonoBehaviour
         sceneData.playerHealth = player.health;
         sceneData.playerRotation = player.transform.rotation;
         sceneData.cures = GameData.goals;
+
+        DarkSeekerBehaviour[] darkseekersInScene = GetComponents<DarkSeekerBehaviour>();
         //enemy saving data
-        DarkSeekerObject[] darkseekersSaveArray = new DarkSeekerObject[numOfDarkSeekers];
-        sceneData.darkSeekersPosition = new Vector3[darkseekersSaveArray.Length];
-        for (int i = 0; i < darkseekers.Length; i++)
+        sceneData.darkSeekersPosition = new Vector3[darkseekersInScene.Length];
+        sceneData.enemyRotation = new Quaternion[darkseekersInScene.Length];
+        sceneData.enemyHealth = new int[darkseekersInScene.Length];
+
+        for (int i = 0; i < darkseekersInScene.Length; i++)
         {
-            sceneData.darkSeekersPosition[i] = darkseekers[i].transform.position;
+            sceneData.darkSeekersPosition[i] = darkseekersInScene[i].transform.position;
+            sceneData.enemyRotation[i] = darkseekersInScene[i].transform.rotation;
+            sceneData.enemyHealth[i] = darkseekersInScene[i].health;
         }
+
+        sceneData.hasPistol = GameData.hasPistol;
+        sceneData.hasRifle = GameData.hasRifle;
+        sceneData.gunActive = GameData.gunActive;
     }
 
     public void onSaveButtonPressed()
