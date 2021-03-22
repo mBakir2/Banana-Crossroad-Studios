@@ -14,7 +14,7 @@ public class RifleBulletBehaviour : MonoBehaviour
         Debug.Log("Hit the object: " + other.gameObject.name);
         if (other.gameObject.CompareTag("Enemy"))
         {
-            other.gameObject.GetComponent<DarkSeekerBehaviour>().TakeDamage(10);
+            other.gameObject.GetComponent<DarkSeekerBehaviour>().TakeDamage(15);
         }
     }
 }
