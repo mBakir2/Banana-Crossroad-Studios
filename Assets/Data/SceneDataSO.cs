@@ -27,4 +27,6 @@ public class SceneDataSO : ScriptableObject
     public Vector3[] firstAidsPickup;
     public Vector3[] ammoPickup;
 
+    public DarkSeekerSaveData darkSeekersSaveData;
+
 }
