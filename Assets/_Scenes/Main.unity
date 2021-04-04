@@ -716,14 +716,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1820453078}
     m_Modifications:
-    - target: {fileID: 919132149025503342, guid: 4a9957a2f1f287c46ae1384ed44861cf, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2384814401646662433, guid: 4a9957a2f1f287c46ae1384ed44861cf, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3601315317490436354, guid: 4a9957a2f1f287c46ae1384ed44861cf, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -779,10 +771,6 @@ PrefabInstance:
     - target: {fileID: 4229339232663016376, guid: 4a9957a2f1f287c46ae1384ed44861cf, type: 3}
       propertyPath: m_Name
       value: DarkSeeker (3)
-      objectReference: {fileID: 0}
-    - target: {fileID: 4229339232663016376, guid: 4a9957a2f1f287c46ae1384ed44861cf, type: 3}
-      propertyPath: m_TagString
-      value: Enemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a9957a2f1f287c46ae1384ed44861cf, type: 3}
@@ -5376,14 +5364,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1820453078}
     m_Modifications:
-    - target: {fileID: 919132149025503342, guid: 4a9957a2f1f287c46ae1384ed44861cf, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2384814401646662433, guid: 4a9957a2f1f287c46ae1384ed44861cf, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3601315317490436354, guid: 4a9957a2f1f287c46ae1384ed44861cf, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -5439,10 +5419,6 @@ PrefabInstance:
     - target: {fileID: 4229339232663016376, guid: 4a9957a2f1f287c46ae1384ed44861cf, type: 3}
       propertyPath: m_Name
       value: DarkSeeker (5)
-      objectReference: {fileID: 0}
-    - target: {fileID: 4229339232663016376, guid: 4a9957a2f1f287c46ae1384ed44861cf, type: 3}
-      propertyPath: m_TagString
-      value: Enemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a9957a2f1f287c46ae1384ed44861cf, type: 3}
@@ -6593,7 +6569,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &735188812
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7336,7 +7312,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &901889073
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9503,7 +9479,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: S
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2d0cfa8bd12a2124f9a7889bc8e03797, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 2d0cfa8bd12a2124f9a7889bc8e03797, type: 2}
@@ -11402,14 +11378,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1820453078}
     m_Modifications:
-    - target: {fileID: 919132149025503342, guid: 4a9957a2f1f287c46ae1384ed44861cf, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2384814401646662433, guid: 4a9957a2f1f287c46ae1384ed44861cf, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3601315317490436354, guid: 4a9957a2f1f287c46ae1384ed44861cf, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -11466,10 +11434,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: DarkSeeker (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 4229339232663016376, guid: 4a9957a2f1f287c46ae1384ed44861cf, type: 3}
-      propertyPath: m_TagString
-      value: Enemy
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a9957a2f1f287c46ae1384ed44861cf, type: 3}
 --- !u!1001 &1440125432
@@ -11479,14 +11443,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1820453078}
     m_Modifications:
-    - target: {fileID: 919132149025503342, guid: 4a9957a2f1f287c46ae1384ed44861cf, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2384814401646662433, guid: 4a9957a2f1f287c46ae1384ed44861cf, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3601315317490436354, guid: 4a9957a2f1f287c46ae1384ed44861cf, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -11542,10 +11498,6 @@ PrefabInstance:
     - target: {fileID: 4229339232663016376, guid: 4a9957a2f1f287c46ae1384ed44861cf, type: 3}
       propertyPath: m_Name
       value: DarkSeeker (4)
-      objectReference: {fileID: 0}
-    - target: {fileID: 4229339232663016376, guid: 4a9957a2f1f287c46ae1384ed44861cf, type: 3}
-      propertyPath: m_TagString
-      value: Enemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a9957a2f1f287c46ae1384ed44861cf, type: 3}
@@ -14596,6 +14548,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1806633473}
   - component: {fileID: 1806633472}
+  - component: {fileID: 1806633474}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -14654,6 +14607,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1806633474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1806633471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 971bfd559a2213d49bb85a265e54b17c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnemyPrefab: {fileID: 4229339232663016376, guid: 4a9957a2f1f287c46ae1384ed44861cf, type: 3}
 --- !u!4 &1815379285 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3177233524669456304, guid: 9c9c5d7932159e849929a30d6c2e80f5, type: 3}
@@ -15175,14 +15141,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1820453078}
     m_Modifications:
-    - target: {fileID: 919132149025503342, guid: 4a9957a2f1f287c46ae1384ed44861cf, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2384814401646662433, guid: 4a9957a2f1f287c46ae1384ed44861cf, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3601315317490436354, guid: 4a9957a2f1f287c46ae1384ed44861cf, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -15238,10 +15196,6 @@ PrefabInstance:
     - target: {fileID: 4229339232663016376, guid: 4a9957a2f1f287c46ae1384ed44861cf, type: 3}
       propertyPath: m_Name
       value: DarkSeeker (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 4229339232663016376, guid: 4a9957a2f1f287c46ae1384ed44861cf, type: 3}
-      propertyPath: m_TagString
-      value: Enemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a9957a2f1f287c46ae1384ed44861cf, type: 3}
@@ -17628,10 +17582,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 919132149025503342, guid: 4a9957a2f1f287c46ae1384ed44861cf, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3601315317490436354, guid: 4a9957a2f1f287c46ae1384ed44861cf, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -17684,17 +17634,9 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3922855514375777291, guid: 4a9957a2f1f287c46ae1384ed44861cf, type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 4229339232663016376, guid: 4a9957a2f1f287c46ae1384ed44861cf, type: 3}
       propertyPath: m_Name
       value: DarkSeeker
-      objectReference: {fileID: 0}
-    - target: {fileID: 4229339232663016376, guid: 4a9957a2f1f287c46ae1384ed44861cf, type: 3}
-      propertyPath: m_TagString
-      value: Enemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a9957a2f1f287c46ae1384ed44861cf, type: 3}
