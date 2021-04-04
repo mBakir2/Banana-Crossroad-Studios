@@ -5,12 +5,13 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 using System.IO;
+using System;
 /**
- * Authors: Anmoldeep Singh Gill
- *          Chadwick Lapis
- *          Mohammad Bakir
- * Last Modified on: 21th Mar 2020
- */
+* Authors: Anmoldeep Singh Gill
+*          Chadwick Lapis
+*          Mohammad Bakir
+* Last Modified on: 21th Mar 2020
+*/
 public class GameController : MonoBehaviour
 {
     public GameObject pauseMenu;
@@ -251,21 +252,40 @@ public class GameController : MonoBehaviour
 
     public void loadGame()
     {
+        loadGameDataFromPlayerPrefs();
         //Player Data
         player.controller.enabled = false;
         player.transform.position = sceneData.playerPosition;
         player.transform.rotation = sceneData.playerRotation;
+        player.controller.enabled = true;
         GameData.goals = sceneData.cures;
 
 
         DarkSeekerBehaviour[] darkseekersInScene = FindObjectsOfType<DarkSeekerBehaviour>();
 
+        // destroying all current enemies
         for (int i = 0; i < darkseekersInScene.Length; i++)
         {
-            darkseekersInScene[i].transform.position = sceneData.darkSeekersPosition[i];
-            darkseekersInScene[i].transform.rotation = sceneData.enemyRotation[i];
-            darkseekersInScene[i].health = sceneData.enemyHealth[i];
-            darkseekersInScene[i].enemyHealthBar.SetHealth(sceneData.enemyHealth[i]);
+            Destroy(darkseekersInScene[i].gameObject);
+        }
+
+        // instantialing the new enemies from the load data
+        for (int i = 0; i < sceneData.darkSeekersSaveData.darkSeekerObjectArray.Length; i++)
+        {
+            GameObject darkSeeker = Instantiate(darkseekerPrefab);
+            darkSeeker.transform.position = sceneData.darkSeekersSaveData.darkSeekerObjectArray[i].darkSeekerPosition;
+            darkSeeker.transform.rotation = sceneData.darkSeekersSaveData.darkSeekerObjectArray[i].darkSeekerRotation;
+            //darkSeeker.gameObject.GetComponent<DarkSeekerBehaviour>().health = sceneData.darkSeekersSaveObjects[i].darkSeekerHealth;
+            //darkSeeker.gameObject.GetComponent<DarkSeekerBehaviour>().enemyHealthBar.SetHealth(sceneData.darkSeekersSaveObjects[i].darkSeekerHealth);
+
+            //darkseekersInScene[i].transform.position = sceneData.darkSeekersSaveObjects[i].darkSeekerPosition;
+            //darkseekersInScene[i].transform.rotation = sceneData.darkSeekersSaveObjects[i].darkSeekerRotation;
+            //darkseekersInScene[i].health = sceneData.darkSeekersSaveObjects[i].darkSeekerHealth;
+            //darkseekersInScene[i].enemyHealthBar.SetHealth(sceneData.darkSeekersSaveObjects[i].darkSeekerHealth);
+            //darkseekersInScene[i].transform.position = sceneData.darkSeekersPosition[i];
+            //darkseekersInScene[i].transform.rotation = sceneData.enemyRotation[i];
+            //darkseekersInScene[i].health = sceneData.enemyHealth[i];
+            //darkseekersInScene[i].enemyHealthBar.SetHealth(sceneData.enemyHealth[i]);
         }
 
 
@@ -296,7 +316,7 @@ public class GameController : MonoBehaviour
 
         //destroy all pickups and reinstantiate existing pickups on load
         //destroys
-        
+
         PickupRifle[] rifles = FindObjectsOfType<PickupRifle>();
         PickupPistol[] pistols = FindObjectsOfType<PickupPistol>();
         PickupFirstAid[] firstAids = FindObjectsOfType<PickupFirstAid>();
@@ -372,16 +392,29 @@ public class GameController : MonoBehaviour
 
         DarkSeekerBehaviour[] darkseekersInScene = FindObjectsOfType<DarkSeekerBehaviour>();
         //enemy saving data
+        DarkSeekerSaveObject[] darkSeekerSaveObjects = new DarkSeekerSaveObject[darkseekersInScene.Length];
         sceneData.darkSeekersPosition = new Vector3[darkseekersInScene.Length];
         sceneData.enemyRotation = new Quaternion[darkseekersInScene.Length];
         sceneData.enemyHealth = new int[darkseekersInScene.Length];
 
         for (int i = 0; i < darkseekersInScene.Length; i++)
         {
+            darkSeekerSaveObjects[i] = new DarkSeekerSaveObject{
+                darkSeekerPosition = darkseekersInScene[i].transform.position,
+                darkSeekerHealth = darkseekersInScene[i].health,
+                darkSeekerRotation = darkseekersInScene[i].transform.rotation
+            };
             sceneData.darkSeekersPosition[i] = darkseekersInScene[i].transform.position;
             sceneData.enemyRotation[i] = darkseekersInScene[i].transform.rotation;
             sceneData.enemyHealth[i] = darkseekersInScene[i].health;
         }
+
+        DarkSeekerSaveData darkSeekerSaveData = new DarkSeekerSaveData
+        {
+            darkSeekerObjectArray = darkSeekerSaveObjects
+        };
+
+        sceneData.darkSeekersSaveData = darkSeekerSaveData;
 
         //pickups goal data
         PickupRifle[] rifles = FindObjectsOfType<PickupRifle>();
@@ -420,10 +453,118 @@ public class GameController : MonoBehaviour
         sceneData.hasPistol = GameData.hasPistol;
         sceneData.hasRifle = GameData.hasRifle;
         sceneData.gunActive = GameData.gunActive;
+
+        saveGameDataInPlayerPrefs();
     }
 
     public void onSaveButtonPressed()
     {
         saveGame();
     }
+
+    public void saveGameDataInPlayerPrefs()
+    {
+        // setting player position in player preferences
+        PlayerPrefs.SetFloat("playerTransformX", sceneData.playerPosition.x);
+        PlayerPrefs.SetFloat("playerTransformY", sceneData.playerPosition.y);
+        PlayerPrefs.SetFloat("playerTransformZ", sceneData.playerPosition.z);
+
+        // setting player rotation in player preferences
+        PlayerPrefs.SetFloat("playerRotationX", sceneData.playerRotation.x);
+        PlayerPrefs.SetFloat("playerRotationY", sceneData.playerRotation.y);
+        PlayerPrefs.SetFloat("playerRotationZ", sceneData.playerRotation.z);
+        PlayerPrefs.SetFloat("playerRotationW", sceneData.playerRotation.w);
+
+        // setting player health in player prefrences
+        PlayerPrefs.SetInt("playerHealth", sceneData.playerHealth);
+
+        // setting cures delivered in player prefrences
+        PlayerPrefs.SetInt("curesDelivered", sceneData.cures);
+
+        PlayerPrefs.SetInt("hasPistol", (sceneData.hasPistol ? 1 : 0));
+        PlayerPrefs.SetInt("hasRifle", (sceneData.hasRifle ? 1 : 0));
+        PlayerPrefs.SetInt("gunActive", sceneData.gunActive);
+
+        PickupItemsData itemsData = new PickupItemsData
+        {
+            riflePickup = sceneData.riflePickup,
+            pistolPickup = sceneData.pistolPickup,
+            firstAidsPickup = sceneData.firstAidsPickup,
+            ammoPickup = sceneData.ammoPickup,
+            goalsPickup = sceneData.goalsPickup
+        };
+
+        string serializedData = JsonUtility.ToJson(sceneData.darkSeekersSaveData);
+        string serializedItemPickupData = JsonUtility.ToJson(itemsData);
+
+        Debug.Log(serializedData);
+
+        PlayerPrefs.SetString("darkSeekersData", serializedData);
+        PlayerPrefs.SetString("pickupData", serializedItemPickupData);
+    }
+
+    // loading the saved data from player preferences
+    public void loadGameDataFromPlayerPrefs()
+    {
+        sceneData.playerPosition.x = PlayerPrefs.GetFloat("playerTransformX");
+        sceneData.playerPosition.y = PlayerPrefs.GetFloat("playerTransformY");
+        sceneData.playerPosition.z = PlayerPrefs.GetFloat("playerTransformZ");
+
+        sceneData.playerRotation.x = PlayerPrefs.GetFloat("playerRotationX");
+        sceneData.playerRotation.y = PlayerPrefs.GetFloat("playerRotationY");
+        sceneData.playerRotation.z = PlayerPrefs.GetFloat("playerRotationZ");
+        sceneData.playerRotation.w = PlayerPrefs.GetFloat("playerRotationW");
+
+        sceneData.playerHealth = PlayerPrefs.GetInt("playerHealth");
+
+        sceneData.cures = PlayerPrefs.GetInt("curesDelivered");
+
+        sceneData.hasPistol = (PlayerPrefs.GetInt("hasPistol") != 0);
+        sceneData.hasRifle = (PlayerPrefs.GetInt("hasRifle") != 0);
+        sceneData.gunActive = PlayerPrefs.GetInt("gunActive");
+
+        sceneData.darkSeekersSaveData = JsonUtility.FromJson<DarkSeekerSaveData>(PlayerPrefs.GetString("darkSeekersData"));
+        PickupItemsData itemsData = JsonUtility.FromJson<PickupItemsData>(PlayerPrefs.GetString("pickupData"));
+        sceneData.riflePickup = itemsData.riflePickup;
+        sceneData.pistolPickup = itemsData.pistolPickup;
+        sceneData.firstAidsPickup = itemsData.firstAidsPickup;
+        sceneData.ammoPickup = itemsData.ammoPickup;
+        sceneData.goalsPickup = itemsData.goalsPickup;
+    }
+}
+
+// wrapper class for storing the item pickup arrays
+[Serializable]
+public class PickupItemsData
+{
+    [SerializeField]
+    public Vector3[] riflePickup;
+    [SerializeField]
+    public Vector3[] pistolPickup;
+    [SerializeField]
+    public Vector3[] firstAidsPickup;
+    [SerializeField]
+    public Vector3[] ammoPickup;
+    [SerializeField]
+    public Vector3[] goalsPickup;
+}
+
+// wrapper class for storing dark seekers save data objects array
+[Serializable]
+public class DarkSeekerSaveData
+{
+    [SerializeField]
+    public DarkSeekerSaveObject[] darkSeekerObjectArray;
+}
+
+// dark seekers save object class to save dark seekers position, rotation and health
+[Serializable]
+public class DarkSeekerSaveObject
+{
+    [SerializeField]
+    public Vector3 darkSeekerPosition;
+    [SerializeField]
+    public Quaternion darkSeekerRotation;
+    [SerializeField]
+    public int darkSeekerHealth;
 }
