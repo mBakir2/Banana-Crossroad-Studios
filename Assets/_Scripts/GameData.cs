@@ -5,7 +5,7 @@ using UnityEngine;
  * Authors: Anmoldeep Singh Gill
  *          Chadwick Lapis
  *          Mohammad Bakir
- * Last Modified on: 16th Feb 2020
+ * Last Modified on: 4th Apr 2020
  */
 public static class GameData
 {
@@ -30,4 +30,6 @@ public static class GameData
     public static KeyCode backKey { get; set; } = KeyCode.S;
     public static KeyCode rightKey { get; set; } = KeyCode.D;
     public static KeyCode jumpKey { get; set; } = KeyCode.Space;
+
+    public static GameObject objectSelected;
 }
