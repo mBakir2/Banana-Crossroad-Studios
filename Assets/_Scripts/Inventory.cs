@@ -12,7 +12,7 @@ public class Inventory : MonoBehaviour
     public GameObject firstaidDropUI;
     public GameObject ammoDropUI;
     private int firstAidDroppable;
-    private int ammoDroppable;
+    private int ammoDroppable = 1;
     private int ammoCombined;
     private Slots[] boxes;
     // Start is called before the first frame update
@@ -20,11 +20,25 @@ public class Inventory : MonoBehaviour
     {
         firstAidDroppable = GameData.aidKits;
         boxes = FindObjectsOfType<Slots>();
+
+        if (GameData.ammoPistol / 60 > GameData.ammoRifle / 60)
+        {
+            ammoCombined = GameData.ammoRifle / 60;
+        }
+        else
+        {
+            ammoCombined = GameData.ammoRifle / 60;
+        }
+        Debug.Log(firstAidDroppable);
+        Debug.Log(GameData.aidKits);
+        Debug.Log(ammoCombined);
+        Debug.Log(ammoDroppable);
     }
 
     // Update is called once per frame
     void Update()
     {
+        
         if (firstAidDroppable > GameData.aidKits)
         {
             //remove firstaid prefab on inventory
@@ -35,9 +49,9 @@ public class Inventory : MonoBehaviour
                 {
                     if (slot.isTaken)
                     {
-                        if (slot.gameObject.GetComponent<UIIdentifier>().identifier)
+                        if (!slot.GetComponentInChildren<UIIdentifier>().identifier)
                         {
-                            //Destroy(slot.gameObject);
+                            Destroy(slot.GetComponentInChildren<UIIdentifier>().gameObject);
                             //destroy child of slot not slot
                             firstAidDroppable--;
                             break;
@@ -55,14 +69,11 @@ public class Inventory : MonoBehaviour
             {
                 foreach (Slots slot in boxes)
                 {
-                    if (slot.isTaken)
+                    if (!slot.isTaken)
                     {
-                        if (slot.gameObject.GetComponent<UIIdentifier>().identifier)
-                        {
-                            Instantiate(firstaidDropUI , slot.gameObject.transform);
-                            firstAidDroppable++;
-                            break;
-                        }
+                        Instantiate(firstaidDropUI, slot.gameObject.transform);
+                        firstAidDroppable++;
+                        break;
                     }
                 }
             }
@@ -84,13 +95,13 @@ public class Inventory : MonoBehaviour
             //remove an ammo prefab on inventory
             while (ammoDroppable != ammoCombined)
             {
-                foreach (Slots slot in boxes)
+                for (int i = 0; i < boxes.Length; i++)
                 {
-                    if (slot.isTaken)
+                    if (boxes[i].isTaken)
                     {
-                        if (slot.gameObject.GetComponent<UIIdentifier>().identifier)
+                        if (!boxes[i].GetComponent<UIIdentifier>().identifier)
                         {
-                            //Destroy(slot.gameObject);
+                            Destroy(boxes[i].GetComponentInChildren<UIIdentifier>().gameObject);
                             //destroy child of slot not slot
                             ammoDroppable--;
                             break;
@@ -105,16 +116,13 @@ public class Inventory : MonoBehaviour
 
             while (ammoDroppable != GameData.aidKits)
             {
-                foreach (Slots slot in boxes)
+                for (int i = 0; i < boxes.Length; i++)
                 {
-                    if (slot.isTaken)
+                    if (boxes[i].isTaken)
                     {
-                        if (slot.gameObject.GetComponent<UIIdentifier>().identifier)
-                        {
-                            Instantiate(ammoDropUI, slot.gameObject.transform);
-                            ammoDroppable++;
-                            break;
-                        }
+                        Instantiate(ammoDropUI, boxes[i].gameObject.transform);
+                        ammoDroppable++;
+                        break;
                     }
                 }
             }
