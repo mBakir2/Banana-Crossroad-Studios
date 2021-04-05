@@ -7,11 +7,11 @@ using TMPro;
 using System.IO;
 using System;
 /**
-* Authors: Anmoldeep Singh Gill
-*          Chadwick Lapis
-*          Mohammad Bakir
-* Last Modified on: 21th Mar 2020
-*/
+ * Authors: Anmoldeep Singh Gill
+ *          Chadwick Lapis
+ *          Mohammad Bakir
+ * Last Modified on: 4th Apr 2020
+ */
 public class GameController : MonoBehaviour
 {
     public GameObject pauseMenu;
@@ -90,16 +90,16 @@ public class GameController : MonoBehaviour
         }
 
         //inventory
-        if (Input.GetKeyDown(KeyCode.I) && !inventory.activeSelf)
-        {
-            inventory.SetActive(true);
-            //Cursor.lockState = CursorLockMode.None;
-        }
-        else if (Input.GetKeyDown(KeyCode.I))
-        {
-            inventory.SetActive(false);
-            //Cursor.lockState = CursorLockMode.Locked;
-        }
+        //if (Input.GetKeyDown(KeyCode.I) && !inventory.activeSelf)
+        //{
+        //    inventory.SetActive(true);
+        //    //Cursor.lockState = CursorLockMode.None;
+        //}
+        //else if (Input.GetKeyDown(KeyCode.I))
+        //{
+        //    inventory.SetActive(false);
+        //    //Cursor.lockState = CursorLockMode.Locked;
+        //}
 
         //updates user ui -  items
         if (GameData.hasRifle)
@@ -213,9 +213,16 @@ public class GameController : MonoBehaviour
         Time.timeScale = 0f;
     }
 
-    public void onPauseButtonPressed()
+    public void openInventory()
     {
-        pauseGame();
+        if (inventory.activeSelf)
+        {
+            inventory.SetActive(false);
+        }
+        else if (!inventory.activeSelf)
+        {
+            inventory.SetActive(true);
+        }
     }
 
     public void SelectRifle()
