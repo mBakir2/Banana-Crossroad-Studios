@@ -8,17 +8,14 @@ using UnityEngine.EventSystems;
  *          Mohammad Bakir
  * Last Modified on: 4th Apr 2020
  */
-public class DragNDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler
+public class DragNDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
-    public Canvas canvas;
     public GameObject itemDragged;
-    private RectTransform uiDragged;
-    private CanvasGroup canvasGroup;
+    public CanvasGroup canvasGroup;
     // Start is called before the first frame update
     void Start()
     {
-        uiDragged = GetComponent<RectTransform>();
-        canvasGroup = GetComponent<CanvasGroup>();
+
     }
 
     // Update is called once per frame
@@ -30,25 +27,25 @@ public class DragNDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, 
     public void OnBeginDrag(PointerEventData eventData)
     {
         Debug.Log("begin drag");
-        Instantiate(itemDragged);
+        GameData.objectSelected = eventData.selectedObject;
         canvasGroup.blocksRaycasts = false;
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        Debug.Log("dragging");
-        uiDragged.anchoredPosition += eventData.delta / canvas.scaleFactor;
+        transform.position = Input.mousePosition;
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
         Debug.Log("drag ended");
         canvasGroup.blocksRaycasts = true;
+        transform.localPosition = Vector3.zero;
     }
 
-    public void OnPointerDown(PointerEventData eventData)
-    {
-        Debug.Log("pointer pressed down");
-    }
+    //public void OnPointerDown(PointerEventData eventData)
+    //{
+    //    Debug.Log("pointer pressed down");
+    //}
 
 }

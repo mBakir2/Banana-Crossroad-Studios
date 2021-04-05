@@ -1,16 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 /**
  * Authors: Anmoldeep Singh Gill
  *          Chadwick Lapis
  *          Mohammad Bakir
  * Last Modified on: 4th Apr 2020
  */
-public class Backpack : MonoBehaviour, IDropHandler
+public class Slots : MonoBehaviour
 {
-
+    public bool isTaken = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,14 +19,13 @@ public class Backpack : MonoBehaviour, IDropHandler
     // Update is called once per frame
     void Update()
     {
-        
-    }
-
-    public void OnDrop(PointerEventData eventData)
-    {
-        if (eventData.pointerDrag != null)
+        if (transform.childCount > 0)
         {
-            eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().anchoredPosition;
+            isTaken = true;
+        }
+        else
+        {
+            isTaken = false;
         }
     }
 }
