@@ -35,7 +35,7 @@ public class InstantiateArea : MonoBehaviour, IDropHandler
         playerRotation = player.transform.rotation;
 
         Debug.Log("something dropped");
-        Instantiate(firstAid, playerPosition + new Vector3(0, 10), playerRotation);
+        Instantiate(firstAid, playerPosition + new Vector3(0, 0, 10), playerRotation);
 
         //if (GameData.objectSelected.GetComponent<UIIdentifier>())
         //{
