@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
  * Authors: Anmoldeep Singh Gill
  *          Chadwick Lapis
  *          Mohammad Bakir
- * Last Modified on: 4th Apr 2020
+ * Last Modified on: 5th Apr 2020
  */
 public class InstantiateArea : MonoBehaviour, IDropHandler
 {
@@ -35,15 +35,16 @@ public class InstantiateArea : MonoBehaviour, IDropHandler
         playerRotation = player.transform.rotation;
 
         Debug.Log("something dropped");
-        Instantiate(firstAid, playerPosition + new Vector3(0, 10), playerRotation);
+        Debug.Log(eventData.pointerDrag);
+        //Instantiate(firstAid, playerPosition + player.transform.forward * 10, playerRotation);
 
-        //if (GameData.objectSelected.GetComponent<UIIdentifier>())
-        //{
-        //    Instantiate(firstAid, playerPosition + new Vector3(0, 10), playerRotation);
-        //}
-        //else
-        //{
-        //    Instantiate(ammo, playerPosition + new Vector3(0, 10), playerRotation);
-        //}
+        if (eventData.pointerDrag.GetComponent<UIIdentifier>().identifier)
+        {
+            Instantiate(firstAid, playerPosition + player.transform.forward * 10, playerRotation);
+        }
+        else
+        {
+            Instantiate(ammo, playerPosition + player.transform.forward * 10, playerRotation);
+        }
     }
 }

@@ -29,6 +29,7 @@ public class DragNDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDra
         Debug.Log("begin drag");
         GameData.objectSelected = eventData.selectedObject;
         canvasGroup.blocksRaycasts = false;
+        //Debug.Log(eventData.pointerDrag);
     }
 
     public void OnDrag(PointerEventData eventData)
