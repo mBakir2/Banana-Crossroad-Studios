@@ -74,4 +74,10 @@ public class MainMenuScript : MonoBehaviour
             loseSound.SetActive(false);
         }
     }
+
+    public void LoadGame()
+    {
+        GameData.loadFromMainMenu = true;
+        SceneManager.LoadScene(1);
+    }
 }

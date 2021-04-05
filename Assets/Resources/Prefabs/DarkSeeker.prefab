@@ -1218,7 +1218,7 @@ GameObject:
   - component: {fileID: 919132149025503341}
   m_Layer: 6
   m_Name: DarkSeeker
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1326,6 +1326,9 @@ MonoBehaviour:
   attackDistance: 3.2
   playerBehaviour: {fileID: 0}
   cooldown: 2
+  damageAmount: 10
+  health: 100
+  enemyHealthBar: {fileID: 3922855514229824248}
 --- !u!1 &4891736115122644602
 GameObject:
   m_ObjectHideFlags: 0
@@ -2470,3 +2473,14 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1674177636785685233, guid: d7c83670446e27444ae67638a2e7e749, type: 3}
   m_PrefabInstance: {fileID: 2399037608812310213}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3922855514229824248 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1674177636908577853, guid: d7c83670446e27444ae67638a2e7e749, type: 3}
+  m_PrefabInstance: {fileID: 2399037608812310213}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5feb12c1658c31b4e91d94c54a362909, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
