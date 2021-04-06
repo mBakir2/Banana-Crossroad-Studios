@@ -1,6 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+/**
+ * Authors: Anmoldeep Singh Gill
+ *          Chadwick Lapis
+ *          Mohammad Bakir
+ * Last Modified on: 29th March 2020
+ */
+
 [CreateAssetMenu(fileName = "SceneData", menuName = "Data/SceneData")]
 public class SceneDataSO : ScriptableObject
 {
