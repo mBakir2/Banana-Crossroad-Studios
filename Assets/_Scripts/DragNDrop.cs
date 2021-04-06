@@ -26,7 +26,7 @@ public class DragNDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDra
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        Debug.Log("begin drag");
+        //Debug.Log("begin drag");
         GameData.objectSelected = eventData.selectedObject;
         canvasGroup.blocksRaycasts = false;
         //Debug.Log(eventData.pointerDrag);
@@ -39,7 +39,7 @@ public class DragNDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDra
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        Debug.Log("drag ended");
+        //Debug.Log("drag ended");
         canvasGroup.blocksRaycasts = true;
         transform.localPosition = Vector3.zero;
     }
