@@ -5,10 +5,11 @@ using UnityEngine;
  * Authors: Anmoldeep Singh Gill
  *          Chadwick Lapis
  *          Mohammad Bakir
- * Last Modified on: 21th Mar 2020
+ * Last Modified on: 5th Apr 2020
  */
 public class PickupRifle : MonoBehaviour
 {
+    public GameObject rifle;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +32,7 @@ public class PickupRifle : MonoBehaviour
             if (GameData.gunActive == 0)
             {
                 GameData.gunActive = 1;
+                rifle.SetActive(true);
             }
         }
     }
