@@ -53,6 +53,7 @@ public class MainMenuScript : MonoBehaviour
         GameData.ammoPistol = 0;
         GameData.ammoRifle = 0;
         GameData.gunActive = 0;
+        GameData.loadFromMainMenu = false;
     }
     public void QuitGame()
     {
