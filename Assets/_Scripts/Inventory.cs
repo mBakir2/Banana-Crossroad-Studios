@@ -11,28 +11,27 @@ public class Inventory : MonoBehaviour
 {
     public GameObject firstaidDropUI;
     public GameObject ammoDropUI;
-    private int firstAidDroppable;
+    private int firstAidDroppable = 1;
     private int ammoDroppable = 1;
-    private int ammoCombined;
-    private Slots[] boxes;
+    private int ammoCombined = 0;
+    public Slots[] boxes;
     // Start is called before the first frame update
     void Start()
     {
-        firstAidDroppable = GameData.aidKits;
-        boxes = FindObjectsOfType<Slots>();
+        //boxes = FindObjectsOfType<Slots>();
 
-        if (GameData.ammoPistol / 60 > GameData.ammoRifle / 60)
-        {
-            ammoCombined = GameData.ammoRifle / 60;
-        }
-        else
-        {
-            ammoCombined = GameData.ammoRifle / 60;
-        }
-        Debug.Log(firstAidDroppable);
-        Debug.Log(GameData.aidKits);
-        Debug.Log(ammoCombined);
-        Debug.Log(ammoDroppable);
+        //if (GameData.ammoPistol / 60 > GameData.ammoRifle / 60)
+        //{
+        //    ammoCombined = GameData.ammoRifle / 60;
+        //}
+        //else
+        //{
+        //    ammoCombined = GameData.ammoRifle / 60;
+        //}
+        //Debug.Log(firstAidDroppable);
+        //Debug.Log(GameData.aidKits);
+        //Debug.Log(ammoCombined);
+        //Debug.Log(ammoDroppable);
     }
 
     // Update is called once per frame
@@ -45,13 +44,14 @@ public class Inventory : MonoBehaviour
 
             while (firstAidDroppable != GameData.aidKits)
             {
-                foreach (Slots slot in boxes)
+                for (int i = 0; i < boxes.Length; i++)
                 {
-                    if (slot.isTaken)
+                    Debug.Log("Rem F Slot" + i);
+                    if (boxes[i].isTaken)
                     {
-                        if (!slot.GetComponentInChildren<UIIdentifier>().identifier)
+                        if (boxes[i].GetComponentInChildren<UIIdentifier>().identifier)
                         {
-                            Destroy(slot.GetComponentInChildren<UIIdentifier>().gameObject);
+                            Destroy(boxes[i].GetComponentInChildren<UIIdentifier>().gameObject);
                             //destroy child of slot not slot
                             firstAidDroppable--;
                             break;
@@ -67,11 +67,15 @@ public class Inventory : MonoBehaviour
 
             while (firstAidDroppable != GameData.aidKits)
             {
-                foreach (Slots slot in boxes)
+                for (int i = 0; i < boxes.Length; i++)
                 {
-                    if (!slot.isTaken)
+                    Debug.Log("Add F Slot" + i);
+                    if (!boxes[i].isTaken)
                     {
-                        Instantiate(firstaidDropUI, slot.gameObject.transform);
+                        GameObject e = Instantiate(firstaidDropUI);
+                        e.transform.parent = boxes[i].transform;
+                        e.transform.localPosition = new Vector3(0, 0, 0);
+                        e.transform.localScale = new Vector3(1, 1, 1);
                         firstAidDroppable++;
                         break;
                     }
@@ -80,13 +84,20 @@ public class Inventory : MonoBehaviour
         }
 
         //counts the ammo boxes droppable with a 60 rifle ammo and 60 pistol ammo
-        if (GameData.ammoPistol / 60 > GameData.ammoRifle / 60)
+        if( GameData.ammoPistol >= 60 && GameData.ammoRifle >= 60)
         {
-            ammoCombined = GameData.ammoRifle / 60;
+            if (GameData.ammoPistol / 60 > GameData.ammoRifle / 60)
+            {
+                ammoCombined = GameData.ammoRifle / 60;
+            }
+            else
+            {
+                ammoCombined = GameData.ammoRifle / 60;
+            }
         }
         else
         {
-            ammoCombined = GameData.ammoRifle / 60;
+            ammoCombined = 0;
         }
         
 
@@ -99,7 +110,8 @@ public class Inventory : MonoBehaviour
                 {
                     if (boxes[i].isTaken)
                     {
-                        if (!boxes[i].GetComponent<UIIdentifier>().identifier)
+                        Debug.Log("Rem Amm Slot" + i);
+                        if (!boxes[i].GetComponentInChildren<UIIdentifier>().identifier)
                         {
                             Destroy(boxes[i].GetComponentInChildren<UIIdentifier>().gameObject);
                             //destroy child of slot not slot
@@ -118,9 +130,13 @@ public class Inventory : MonoBehaviour
             {
                 for (int i = 0; i < boxes.Length; i++)
                 {
-                    if (boxes[i].isTaken)
+                    Debug.Log("Add Amm Slot" + i);
+                    if (!boxes[i].isTaken)
                     {
-                        Instantiate(ammoDropUI, boxes[i].gameObject.transform);
+                        GameObject e = Instantiate(ammoDropUI);
+                        e.transform.parent = boxes[i].transform;
+                        e.transform.localPosition = new Vector3(0, 0, 0);
+                        e.transform.localScale = new Vector3(1, 1, 1);
                         ammoDroppable++;
                         break;
                     }
