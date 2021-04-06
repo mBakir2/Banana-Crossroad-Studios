@@ -10,7 +10,7 @@ using System;
  * Authors: Anmoldeep Singh Gill
  *          Chadwick Lapis
  *          Mohammad Bakir
- * Last Modified on: 4th Apr 2020
+ * Last Modified on: 5th Apr 2020
  */
 public class GameController : MonoBehaviour
 {
@@ -139,49 +139,6 @@ public class GameController : MonoBehaviour
         Time.timeScale = 1f;
     }
 
-    // saves the game by making a save.json file
-    //public void SaveGame()
-    //{
-    //    // getting the player, enemies game objects
-    //    PlayerBehaviour playerBehaviour = FindObjectOfType<PlayerBehaviour>();
-    //    DarkSeekerObject[] darkseekersSaveArray = new DarkSeekerObject[numOfDarkSeekers];
-
-    //    for(int i = 0; i < darkseekers.Length; i++)
-    //    {
-    //        darkseekersSaveArray[i] = new DarkSeekerObject
-    //        {
-    //            name = darkseekers[i].gameObject.name,
-    //            position = darkseekers[i].transform.position
-    //        };
-    //        Debug.Log(darkseekers[i].gameObject.name);
-    //        Debug.Log(darkseekers[i].transform.position);
-    //    }
-
-    //    // making the save object with all the data
-    //    SaveObject saveObj = new SaveObject {
-    //        playerPosition = playerBehaviour.transform.position,
-    //        playerHealth = GameData.playerHealth,
-    //        enemies = darkseekersSaveArray,
-    //        win = GameData.win,
-    //        goals = GameData.goals,
-    //        hasRifle = GameData.hasRifle,
-    //        hasPistol = GameData.hasPistol,
-    //        ammoRifle = GameData.ammoRifle,
-    //        ammoPistol = GameData.ammoPistol,
-    //        gunActive = GameData.gunActive,
-    //        aidKits = GameData.aidKits
-    //    };
-
-    //    // using JsonUtility to serealise the save object to JSON
-    //    string json = JsonUtility.ToJson(saveObj, true);
-
-    //    Debug.Log(json);
-
-    //    // making a new file and writing the json data
-    //    // temporary commenting the saving beacuse of an error while playing on deployed site
-    //    File.WriteAllText(Application.dataPath + "/SaveData/saveGame1.json", json);
-    //}
-
     // save object stores all the save data for the game
     private class SaveObject
     {
@@ -284,42 +241,7 @@ public class GameController : MonoBehaviour
             darkSeeker.transform.rotation = sceneData.darkSeekersSaveData.darkSeekerObjectArray[i].darkSeekerRotation;
             //darkSeeker.gameObject.GetComponent<DarkSeekerBehaviour>().health = sceneData.darkSeekersSaveObjects[i].darkSeekerHealth;
             //darkSeeker.gameObject.GetComponent<DarkSeekerBehaviour>().enemyHealthBar.SetHealth(sceneData.darkSeekersSaveObjects[i].darkSeekerHealth);
-
-            //darkseekersInScene[i].transform.position = sceneData.darkSeekersSaveObjects[i].darkSeekerPosition;
-            //darkseekersInScene[i].transform.rotation = sceneData.darkSeekersSaveObjects[i].darkSeekerRotation;
-            //darkseekersInScene[i].health = sceneData.darkSeekersSaveObjects[i].darkSeekerHealth;
-            //darkseekersInScene[i].enemyHealthBar.SetHealth(sceneData.darkSeekersSaveObjects[i].darkSeekerHealth);
-            //darkseekersInScene[i].transform.position = sceneData.darkSeekersPosition[i];
-            //darkseekersInScene[i].transform.rotation = sceneData.enemyRotation[i];
-            //darkseekersInScene[i].health = sceneData.enemyHealth[i];
-            //darkseekersInScene[i].enemyHealthBar.SetHealth(sceneData.enemyHealth[i]);
         }
-
-
-        // semi code for instantiating instead of moving existing items
-
-        //destroy all pickups and reinstantiate existing pickups on load
-        //destroys
-        //DarkSeekerBehaviour[] darkseekersInScene = FindObjectsOfType<DarkSeekerBehaviour>();
-        //for (int i = 0; i < darkseekersInScene.Length; i++)
-        //{
-        //    Destroy(darkseekersInScene[i]);
-        //}
-
-        ////instantiates
-        //for (int i = 0; i < sceneData.darkSeekersPosition.Length; i++)
-        //{
-        //    Instantiate(darkseekerPrefab, sceneData.darkSeekersPosition[i], sceneData.enemyRotation[i]);
-        //}
-
-        //darkseekersInScene = FindObjectsOfType<DarkSeekerBehaviour>();
-
-        //for (int i = 0; i < darkseekersInScene.Length; i++)
-        //{
-        //    darkseekersInScene[i].health = sceneData.enemyHealth[i];
-        //    darkseekersInScene[i].enemyHealthBar.SetHealth(sceneData.enemyHealth[i]);
-        //}
-        //
 
         //destroy all pickups and reinstantiate existing pickups on load
         //destroys
@@ -469,6 +391,7 @@ public class GameController : MonoBehaviour
         saveGame();
     }
 
+    // for saving the data in player prefs
     public void saveGameDataInPlayerPrefs()
     {
         // setting player position in player preferences
@@ -492,6 +415,7 @@ public class GameController : MonoBehaviour
         PlayerPrefs.SetInt("hasRifle", (sceneData.hasRifle ? 1 : 0));
         PlayerPrefs.SetInt("gunActive", sceneData.gunActive);
 
+        // making a new pickup items data class to enclose the pickup item lists
         PickupItemsData itemsData = new PickupItemsData
         {
             riflePickup = sceneData.riflePickup,
@@ -501,6 +425,7 @@ public class GameController : MonoBehaviour
             goalsPickup = sceneData.goalsPickup
         };
 
+        // serializing both data wrapper classes into JSON to store as a string in player prefs
         string serializedData = JsonUtility.ToJson(sceneData.darkSeekersSaveData);
         string serializedItemPickupData = JsonUtility.ToJson(itemsData);
 
@@ -513,6 +438,7 @@ public class GameController : MonoBehaviour
     // loading the saved data from player preferences
     public void loadGameDataFromPlayerPrefs()
     {
+        // geting data from player Prefs and setting in scene data
         sceneData.playerPosition.x = PlayerPrefs.GetFloat("playerTransformX");
         sceneData.playerPosition.y = PlayerPrefs.GetFloat("playerTransformY");
         sceneData.playerPosition.z = PlayerPrefs.GetFloat("playerTransformZ");
@@ -530,6 +456,7 @@ public class GameController : MonoBehaviour
         sceneData.hasRifle = (PlayerPrefs.GetInt("hasRifle") != 0);
         sceneData.gunActive = PlayerPrefs.GetInt("gunActive");
 
+        // parsing the data from JSON and assigning it to the scene data
         sceneData.darkSeekersSaveData = JsonUtility.FromJson<DarkSeekerSaveData>(PlayerPrefs.GetString("darkSeekersData"));
         PickupItemsData itemsData = JsonUtility.FromJson<PickupItemsData>(PlayerPrefs.GetString("pickupData"));
         sceneData.riflePickup = itemsData.riflePickup;

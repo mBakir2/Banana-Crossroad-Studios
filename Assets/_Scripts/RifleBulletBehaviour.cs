@@ -5,7 +5,7 @@ using UnityEngine;
  * Authors: Anmoldeep Singh Gill
  *          Chadwick Lapis
  *          Mohammad Bakir
- * Last Modified on: 21th Mar 2020
+ * Last Modified on: 21st Mar 2020
  */
 public class RifleBulletBehaviour : MonoBehaviour
 {

@@ -3,6 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/**
+ * Authors: Anmoldeep Singh Gill
+ *          Chadwick Lapis
+ *          Mohammad Bakir
+ * Last Modified on: 21st March 2020
+ */
+
 [System.Serializable]
 public class HealthBarScreenSpaceController : MonoBehaviour
 {
