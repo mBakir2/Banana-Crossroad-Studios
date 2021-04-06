@@ -5,7 +5,7 @@ using UnityEngine;
  * Authors: Anmoldeep Singh Gill
  *          Chadwick Lapis
  *          Mohammad Bakir
- * Last Modified on: 4th Apr 2020
+ * Last Modified on: 5th Apr 2020
  */
 public class Inventory : MonoBehaviour
 {
