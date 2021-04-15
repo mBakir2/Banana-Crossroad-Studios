@@ -5,7 +5,7 @@ using UnityEngine;
  * Authors: Anmoldeep Singh Gill
  *          Chadwick Lapis
  *          Mohammad Bakir
- * Last Modified on: 4th Apr 2020
+ * Last Modified on: 15th Apr 2020
  */
 public static class GameData
 {
@@ -32,4 +32,11 @@ public static class GameData
     public static KeyCode jumpKey { get; set; } = KeyCode.Space;
 
     public static GameObject objectSelected;
+
+    // achievements
+    public static bool winOnce = false;
+    public static bool loseOnce = false;
+    public static bool cureOnce = false;
+    public static bool killOnce = false;
+    public static bool winWithoutGun = false;
 }
