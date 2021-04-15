@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 using TMPro;
 using System.IO;
 using System;
@@ -10,7 +9,7 @@ using System;
  * Authors: Anmoldeep Singh Gill
  *          Chadwick Lapis
  *          Mohammad Bakir
- * Last Modified on: 5th Apr 2020
+ * Last Modified on: 15th Apr 2020
  */
 public class GameController : MonoBehaviour
 {
@@ -49,6 +48,15 @@ public class GameController : MonoBehaviour
     public GameObject ammoPref;
     public GameObject firstAidPref;
 
+    //achievement system variables
+    private int compareDark;
+    private int compareCure;
+    private int latest = 0;
+    [Header("Achievement Popup")]
+    public GameObject achieveText;
+    public GameObject achievementUI;
+    public AudioSource SFXSource;
+    public AudioClip sfx;
     // Start is called before the first frame update
     void Start()
     {
@@ -56,6 +64,8 @@ public class GameController : MonoBehaviour
         player = FindObjectOfType<PlayerBehaviour>();
         darkseekers = FindObjectsOfType<DarkSeekerBehaviour>();
         playerCamera = FindObjectOfType<CameraController>();
+        compareCure = FindObjectsOfType<Goal>().Length;
+        compareDark = darkseekers.Length;
         Time.timeScale = 1f;
 
         if (GameData.loadFromMainMenu)
@@ -77,7 +87,7 @@ public class GameController : MonoBehaviour
         //}
 
         // displays the win screen if the player has completed all the goals
-        if (GameData.goals == GameData.totalgoals)
+        if (GameData.goals >= GameData.totalgoals)
         {
             GameData.win = true;
             SceneManager.LoadScene(2);
@@ -130,6 +140,45 @@ public class GameController : MonoBehaviour
 
         uiAid.GetComponent<TMP_Text>().text = GameData.aidKits.ToString();
 
+        //achievement check for two achievements
+        if (!GameData.killOnce)
+        {
+            if (compareDark > FindObjectsOfType<DarkSeekerBehaviour>().Length)
+            {
+                GameData.killOnce = true;
+                latest = 2;
+                StartCoroutine(Achievement());
+            }
+        }
+        if (!GameData.cureOnce)
+        {
+            if (compareCure > FindObjectsOfType<Goal>().Length)
+            {
+                GameData.cureOnce = true;
+                latest = 1;
+                StartCoroutine(Achievement());
+            }
+        }
+    }
+
+    public IEnumerator Achievement()
+    {
+        if (latest == 1)
+        {
+            achieveText.SetActive(true);
+            achieveText.GetComponent<TMP_Text>().text = "Delivered a Cure";
+            SFXSource.PlayOneShot(sfx);
+        }
+        else if (latest == 2)
+        {
+            achieveText.SetActive(true);
+            achieveText.GetComponent<TMP_Text>().text = "Killed a Darkseeker";
+            SFXSource.PlayOneShot(sfx);
+        }
+
+        yield return new WaitForSeconds(5);
+
+        achieveText.SetActive(false);
     }
 
     // resume the game
@@ -179,6 +228,18 @@ public class GameController : MonoBehaviour
         else if (!inventory.activeSelf)
         {
             inventory.SetActive(true);
+        }
+    }
+
+    public void openAchievements()
+    {
+        if (achievementUI.activeSelf)
+        {
+            achievementUI.SetActive(false);
+        }
+        else if (!achievementUI.activeSelf)
+        {
+            achievementUI.SetActive(true);
         }
     }
 
