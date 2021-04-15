@@ -57,6 +57,8 @@ public class GameController : MonoBehaviour
     public GameObject achievementUI;
     public AudioSource SFXSource;
     public AudioClip sfx;
+
+    private bool gameHasLoadedOnce = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -68,11 +70,11 @@ public class GameController : MonoBehaviour
         compareDark = darkseekers.Length;
         Time.timeScale = 1f;
 
-        if (GameData.loadFromMainMenu)
-        {
-            Debug.Log("Loading the game");
-            loadGame();
-        }
+        //if (GameData.loadFromMainMenu)
+        //{
+        //    Debug.Log("Loading the game");
+        //    loadGame();
+        //}
     }
 
     // Update is called once per frame
@@ -159,7 +161,18 @@ public class GameController : MonoBehaviour
                 StartCoroutine(Achievement());
             }
         }
+
+        if (gameHasLoadedOnce)
+        {
+            if (GameData.loadFromMainMenu)
+            {
+                Debug.Log("Loading the game");
+                loadGame();
+            }
+            gameHasLoadedOnce = false;
+        }
     }
+
 
     public IEnumerator Achievement()
     {
@@ -365,11 +378,6 @@ public class GameController : MonoBehaviour
         GameData.hasPistol = sceneData.hasPistol;
         GameData.hasRifle = sceneData.hasRifle;
         GameData.gunActive = sceneData.gunActive;
-    }
-
-    public void onLoadButtonPressed()
-    {
-        loadGame();
     }
 
     public void saveGame()

@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: c646120cfcbf7054489cb2e6fcecc04e, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: b19291621ff67aa42bf1e7548193436a, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -16706,7 +16706,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1806633472}
         m_TargetAssemblyTypeName: GameController, Assembly-CSharp
-        m_MethodName: onLoadButtonPressed
+        m_MethodName: loadGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -17461,8 +17461,8 @@ MonoBehaviour:
   uipistol: {fileID: 0}
   rifle: {fileID: 6286815474415532859}
   pistol: {fileID: 1553664333}
-  player: {fileID: 0}
-  playerCamera: {fileID: 0}
+  player: {fileID: 1619264558}
+  playerCamera: {fileID: 1519533167394532336}
   darkseekers: []
   darkseekerPrefab: {fileID: 4229339232663016376, guid: 4a9957a2f1f287c46ae1384ed44861cf, type: 3}
   sceneData: {fileID: 11400000, guid: c735d3a5dd84cc04791855bbc190027e, type: 2}
@@ -21460,6 +21460,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fd35ed0080fe7ad4c816a3f1e35ad996, type: 3}
+--- !u!114 &1519533167394532336 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1519533166215870379, guid: fd35ed0080fe7ad4c816a3f1e35ad996, type: 3}
+  m_PrefabInstance: {fileID: 1519533167394532335}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5aa51cfbc1685f747827246cf7c73557, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1593994937827375957
 GameObject:
   m_ObjectHideFlags: 0
