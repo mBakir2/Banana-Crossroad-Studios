@@ -58,6 +58,9 @@ public class GameController : MonoBehaviour
     public AudioSource SFXSource;
     public AudioClip sfx;
 
+    [Header("Tutorial Manager")]
+    public GameObject tutorialManager;
+
     private bool gameHasLoadedOnce = true;
     // Start is called before the first frame update
     void Start()
@@ -168,6 +171,12 @@ public class GameController : MonoBehaviour
             {
                 Debug.Log("Loading the game");
                 loadGame();
+            }
+
+            if (GameData.loadTutorial)
+            {
+                Debug.Log("Loading the tutorial");
+                loadTutorial();
             }
             gameHasLoadedOnce = false;
         }
@@ -533,6 +542,11 @@ public class GameController : MonoBehaviour
         sceneData.firstAidsPickup = itemsData.firstAidsPickup;
         sceneData.ammoPickup = itemsData.ammoPickup;
         sceneData.goalsPickup = itemsData.goalsPickup;
+    }
+
+    public void loadTutorial()
+    {
+        tutorialManager.SetActive(true);
     }
 }
 

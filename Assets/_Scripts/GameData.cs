@@ -25,6 +25,7 @@ public static class GameData
     public static int aidKits { get; set; } = 0;
 
     public static bool loadFromMainMenu { get; set; } = false;
+    public static bool loadTutorial { get; set; } = false;
     public static KeyCode forwardKey { get; set; } = KeyCode.W;
     public static KeyCode leftKey { get; set; } = KeyCode.A;
     public static KeyCode backKey { get; set; } = KeyCode.S;
