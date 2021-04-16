@@ -58,8 +58,8 @@ public class MainMenuScript : MonoBehaviour
     public void QuitGame()
     {
         Debug.Log("The game has quit");
-        //Application.Quit();
-        quitScr.SetActive(true);
+        Application.Quit();
+        //quitScr.SetActive(true);
     }
     public void MainMenu()
     {
