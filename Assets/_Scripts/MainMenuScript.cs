@@ -81,4 +81,10 @@ public class MainMenuScript : MonoBehaviour
         GameData.loadFromMainMenu = true;
         SceneManager.LoadScene(1);
     }
+
+    public void LoadTutorial()
+    {
+        GameData.loadTutorial = true;
+        SceneManager.LoadScene(1);
+    }
 }
