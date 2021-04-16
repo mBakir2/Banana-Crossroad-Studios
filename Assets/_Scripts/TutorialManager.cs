@@ -3,6 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/**
+ * Authors: Anmoldeep Singh Gill
+ *          Chadwick Lapis
+ *          Mohammad Bakir
+ * Last Modified on: 16th Apr 2020
+ */
+
 public class TutorialManager : MonoBehaviour
 {
     [Header("Buttons")]
@@ -30,6 +37,7 @@ public class TutorialManager : MonoBehaviour
     private Quaternion initialJoyStickRotation = new Quaternion(0, 0, 0, 0);
     private Vector3 initialplayerPosition = new Vector3(0, 0, 0);
 
+    // popup shown booleans for sequencing
     private bool rightJoystickPopupShown = false;
     private bool leftJoystickPopupShown = true;
     private bool jumpButtonPopupShown = true;
@@ -44,6 +52,7 @@ public class TutorialManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // setting up intial rotation of camera and position of player
         initialJoyStickRotation = rightJoystickMove.transform.localRotation;
         initialplayerPosition = leftJoystickMove.transform.localPosition;
     }
@@ -51,6 +60,7 @@ public class TutorialManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // sequencing the popups according to their boolean values
         if (!rightJoystickPopupShown)
         {
             ActivateRightJoystickPopup();
@@ -102,6 +112,9 @@ public class TutorialManager : MonoBehaviour
         }
     }
 
+    /** 
+     * Activate popups and deactivate them after user interacts with the buttons or joysticks
+     * */
     private void ActivateRightJoystickPopup()
     {
         rightJoystickPopups.gameObject.SetActive(true);
@@ -190,6 +203,7 @@ public class TutorialManager : MonoBehaviour
         });
     }
 
+    // on click listener for inventory button to open the next popup
     private void listenForInventoryButtonClose()
     {
         bool inventoryNotClickedOnce = true;
@@ -219,6 +233,7 @@ public class TutorialManager : MonoBehaviour
         });
     }
 
+    // on click listener for pause button to open the next popup
     private void listenForPauseButtonClose()
     {
         bool pauseButtonNotClickedOnce = true;
@@ -254,6 +269,7 @@ public class TutorialManager : MonoBehaviour
         StartCoroutine(DeactivateSideInventoryPopup(5.0f));
     }
 
+    // Couroutine for disabling the last popup and showing the end tutorial screen
     private IEnumerator DeactivateSideInventoryPopup(float delay)
     {
         yield return new WaitForSeconds(delay);
