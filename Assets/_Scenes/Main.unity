@@ -8675,7 +8675,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &724030753
 Transform:
   m_ObjectHideFlags: 0
@@ -8702,22 +8702,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87b5e6401d181604f96ef36e2771c23e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftJoystick: {fileID: 790379017}
-  rightJoystick: {fileID: 1361069550}
+  leftJoystickMove: {fileID: 1619264557}
+  rightJoystickMove: {fileID: 1519533167394532337}
   shootButton: {fileID: 354950707}
   jumpButton: {fileID: 1341846673}
   inventoryButton: {fileID: 2084917028}
   pauseButton: {fileID: 1949839702}
   achivementsButton: {fileID: 7028607892110997513}
-  PauseMenuReturnButton: {fileID: 0}
-  jumpPopup: {fileID: 0}
-  shootPopup: {fileID: 0}
-  rightJoystickPopups: {fileID: 0}
-  leftJoystickPopups: {fileID: 0}
-  achivementsPopup: {fileID: 0}
-  InventoryPopup: {fileID: 0}
-  pauseButtonPopup: {fileID: 0}
-  sideInventoryPopup: {fileID: 0}
+  PauseMenuReturnButton: {fileID: 411030583}
+  jumpPopup: {fileID: 1860363072}
+  shootPopup: {fileID: 1070225397}
+  rightJoystickPopups: {fileID: 1463318308}
+  leftJoystickPopups: {fileID: 1373936420}
+  achivementsPopup: {fileID: 1506301711}
+  InventoryPopup: {fileID: 478905049}
+  pauseButtonPopup: {fileID: 1953434430}
+  sideInventoryPopup: {fileID: 505808639}
 --- !u!4 &730161861 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5631515205187982936, guid: 161f65831d4594648821e258fa0abdf7, type: 3}
@@ -19584,6 +19584,7 @@ MonoBehaviour:
   achievementUI: {fileID: 7901194355441834943}
   SFXSource: {fileID: 950991577}
   sfx: {fileID: 8300000, guid: 59be1afd5c2e24a49aaea4fed794e3ad, type: 3}
+  tutorialManager: {fileID: 724030752}
 --- !u!4 &1806633473
 Transform:
   m_ObjectHideFlags: 0
@@ -24068,12 +24069,17 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1519533166215870379, guid: fd35ed0080fe7ad4c816a3f1e35ad996, type: 3}
   m_PrefabInstance: {fileID: 1519533167394532335}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1519533167394532337}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5aa51cfbc1685f747827246cf7c73557, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1519533167394532337 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1519533166215870381, guid: fd35ed0080fe7ad4c816a3f1e35ad996, type: 3}
+  m_PrefabInstance: {fileID: 1519533167394532335}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1593994937827375957
 GameObject:
   m_ObjectHideFlags: 0
