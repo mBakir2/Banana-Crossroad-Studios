@@ -5,7 +5,7 @@ using UnityEngine;
  * Authors: Anmoldeep Singh Gill
  *          Chadwick Lapis
  *          Mohammad Bakir
- * Last Modified on: 4th Apr 2020
+ * Last Modified on: 5th Apr 2020
  */
 public class Inventory : MonoBehaviour
 {
@@ -73,9 +73,7 @@ public class Inventory : MonoBehaviour
                     if (!boxes[i].isTaken)
                     {
                         GameObject e = Instantiate(firstaidDropUI);
-                        e.transform.parent = boxes[i].transform;
-                        e.transform.localPosition = new Vector3(0, 0, 0);
-                        e.transform.localScale = new Vector3(1, 1, 1);
+                        e.transform.SetParent(boxes[i].transform, false);
                         firstAidDroppable++;
                         break;
                     }
@@ -134,9 +132,7 @@ public class Inventory : MonoBehaviour
                     if (!boxes[i].isTaken)
                     {
                         GameObject e = Instantiate(ammoDropUI);
-                        e.transform.parent = boxes[i].transform;
-                        e.transform.localPosition = new Vector3(0, 0, 0);
-                        e.transform.localScale = new Vector3(1, 1, 1);
+                        e.transform.SetParent(boxes[i].transform, false);
                         ammoDroppable++;
                         break;
                     }
