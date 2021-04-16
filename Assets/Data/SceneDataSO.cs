@@ -37,4 +37,10 @@ public class SceneDataSO : ScriptableObject
 
     public DarkSeekerSaveData darkSeekersSaveData;
 
+    // achievements
+    public bool winOnce = false;
+    public bool loseOnce = false;
+    public bool cureOnce = false;
+    public bool killOnce = false;
+    public bool winWithoutGun = false;
 }

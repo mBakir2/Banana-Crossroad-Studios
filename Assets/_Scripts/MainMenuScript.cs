@@ -63,6 +63,7 @@ public class MainMenuScript : MonoBehaviour
     }
     public void MainMenu()
     {
+        GameData.loadTutorial = false;
         SceneManager.LoadScene(0);
     }
     public void EndScreen()
@@ -79,6 +80,12 @@ public class MainMenuScript : MonoBehaviour
     public void LoadGame()
     {
         GameData.loadFromMainMenu = true;
+        SceneManager.LoadScene(1);
+    }
+
+    public void LoadTutorial()
+    {
+        GameData.loadTutorial = true;
         SceneManager.LoadScene(1);
     }
 }
