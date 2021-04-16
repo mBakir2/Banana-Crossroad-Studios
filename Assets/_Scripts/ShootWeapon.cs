@@ -49,7 +49,6 @@ public class ShootWeapon : MonoBehaviour
             bullet.ShootBulletFromSpawnPoint(bulletObject, bulletSpawnPoint, transform);
             StartCoroutine(DestroyBulletAfterSpecifiedTime(bulletObject, bullet.lifetime));
             GameData.ammoRifle--;
-            //bulletType.GetComponent<Rigidbody>().AddForce(bulletSpawnPoint.forward * bullet.speed, ForceMode.Impulse);
         } 
         else if (GameData.gunActive == 2 && GameData.ammoPistol > 0)
         {
@@ -59,28 +58,7 @@ public class ShootWeapon : MonoBehaviour
             bullet.ShootBulletFromSpawnPoint(bulletObject, bulletSpawnPoint, transform);
             StartCoroutine(DestroyBulletAfterSpecifiedTime(bulletObject, bullet.lifetime));
             GameData.ammoPistol--;
-            //bulletType.GetComponent<Rigidbody>().AddForce(bulletSpawnPoint.forward * bullet.speed, ForceMode.Impulse);
         }
-
-
-        //Physics.IgnoreCollision(bullet.GetComponent<Collider>(),
-        //    bulletSpawnPoint.parent.GetComponent<Collider>());
-
-        //bulletObject.transform.position = bulletSpawnPoint.position;
-
-        //Vector3 rotation = bullet.transform.rotation.eulerAngles;
-
-        // add angle to 270 for rifle bullet rotation
-        //bullet.transform.rotation = Quaternion.Euler(rotation.x, transform.eulerAngles.y + 270, rotation.z);
-
-        //bullet.transform.rotation = Quaternion.Euler(rotation.x, transform.eulerAngles.y, rotation.z);
-
-        // play gunshot sound
-
-        // impulse to launch it with force once
-        //bullet.GetComponent<Rigidbody>().AddForce(bulletSpawnPoint.forward * bulletSpeed, ForceMode.Impulse);
-
-        //StartCoroutine(DestroyBulletAfterSpecifiedTime(bullet, lifeTime));
     }
 
     private IEnumerator DestroyBulletAfterSpecifiedTime(GameObject bullet, float delay)

@@ -21,9 +21,11 @@ public class TutorialManager : MonoBehaviour
     public GameObject rightJoystickPopups;
     public GameObject leftJoystickPopups;
     public GameObject achivementsPopup;
-    public GameObject InventoryPopup;
+    public GameObject achivementsOpenPopup;
+    public GameObject inventoryPopup;
     public GameObject pauseButtonPopup;
     public GameObject sideInventoryPopup;
+    public GameObject returnToMainmenuPopup;
 
     private Quaternion initialJoyStickRotation = new Quaternion(0, 0, 0, 0);
     private Vector3 initialplayerPosition = new Vector3(0, 0, 0);
@@ -32,6 +34,12 @@ public class TutorialManager : MonoBehaviour
     private bool leftJoystickPopupShown = true;
     private bool jumpButtonPopupShown = true;
     private bool achivementsButtonPopupShown = true;
+    private bool achivementsOpenButtonPopupShown = true;
+    private bool inventoryButtonPopupShown = true;
+    private bool pauseButtonPopupShown = true;
+    private bool sideInventoryPopupShown = true;
+    private bool shootButtonPopupShown = true;
+    private bool returnToMainMenuPopupShown = true;
 
     // Start is called before the first frame update
     void Start()
@@ -61,6 +69,36 @@ public class TutorialManager : MonoBehaviour
         if (!achivementsButtonPopupShown)
         {
             ActivateAchievementPopup();
+        }
+
+        if (!achivementsOpenButtonPopupShown)
+        {
+            ActivateAchievementOpenPopup();
+        }
+
+        if (!inventoryButtonPopupShown)
+        {
+            ActivateInventoryPopup();
+        }
+
+        if (!pauseButtonPopupShown)
+        {
+            ActivatePauseButtonPopup();
+        }
+
+        if (!shootButtonPopupShown)
+        {
+            ActivateShootButtonPopup();
+        }
+
+        if (!sideInventoryPopupShown)
+        {
+            ActivateSideInventoryPopup();
+        }
+
+        if (!returnToMainMenuPopupShown)
+        {
+            returnToMainmenuPopup.gameObject.SetActive(true);
         }
     }
 
@@ -115,8 +153,114 @@ public class TutorialManager : MonoBehaviour
                 achivementsPopup.gameObject.SetActive(false);
                 achievementNotClickedOnce = false;
                 achivementsButtonPopupShown = true;
+                achivementsOpenButtonPopupShown = false;
             }
         });
+    }
+
+    private void ActivateAchievementOpenPopup()
+    {
+        bool achievementOpenNotClickedOnce = true;
+        achivementsOpenPopup.gameObject.SetActive(true);
+        achivementsButton.GetComponent<Button>().onClick.AddListener(() =>
+        {
+            if (achievementOpenNotClickedOnce)
+            {
+                achivementsOpenPopup.gameObject.SetActive(false);
+                achievementOpenNotClickedOnce = false;
+                achivementsOpenButtonPopupShown = true;
+                inventoryButtonPopupShown = false;
+            }
+        });
+    }
+
+    private void ActivateInventoryPopup()
+    {
+        bool inventoryNotClickedOnce = true;
+        inventoryPopup.gameObject.SetActive(true);
+        inventoryButton.GetComponent<Button>().onClick.AddListener(() =>
+        {
+            if (inventoryNotClickedOnce)
+            {
+                inventoryPopup.gameObject.SetActive(false);
+                inventoryNotClickedOnce = false;
+                inventoryButtonPopupShown = true;
+                listenForInventoryButtonClose();
+            }
+        });
+    }
+
+    private void listenForInventoryButtonClose()
+    {
+        bool inventoryNotClickedOnce = true;
+        inventoryButton.GetComponent<Button>().onClick.AddListener(() =>
+        {
+            if (inventoryNotClickedOnce)
+            {
+                pauseButtonPopupShown = false;
+                inventoryNotClickedOnce = false;
+            }
+        });
+    }
+
+    private void ActivatePauseButtonPopup()
+    {
+        bool pauseNotClickedOnce = true;
+        pauseButtonPopup.gameObject.SetActive(true);
+        pauseButton.GetComponent<Button>().onClick.AddListener(() =>
+        {
+            if (pauseNotClickedOnce)
+            {
+                pauseButtonPopup.gameObject.SetActive(false);
+                pauseNotClickedOnce = false;
+                pauseButtonPopupShown = true;
+                listenForPauseButtonClose();
+            }
+        });
+    }
+
+    private void listenForPauseButtonClose()
+    {
+        bool pauseButtonNotClickedOnce = true;
+        PauseMenuReturnButton.GetComponent<Button>().onClick.AddListener(() =>
+        {
+            if (pauseButtonNotClickedOnce)
+            {
+                shootButtonPopupShown = false;
+                pauseButtonNotClickedOnce = false;
+            }
+        });
+    }
+
+    private void ActivateShootButtonPopup()
+    {
+        bool shootButtonNotClickedOnce = true;
+        shootPopup.gameObject.SetActive(true);
+        shootButton.GetComponent<Button>().onClick.AddListener(() =>
+        {
+            if (shootButtonNotClickedOnce)
+            {
+                shootPopup.gameObject.SetActive(false);
+                shootButtonNotClickedOnce = false;
+                shootButtonPopupShown = true;
+                sideInventoryPopupShown = false;
+            }
+        });
+    }
+
+    private void ActivateSideInventoryPopup()
+    {
+        sideInventoryPopup.gameObject.SetActive(true);
+        StartCoroutine(DeactivateSideInventoryPopup(5.0f));
+    }
+
+    private IEnumerator DeactivateSideInventoryPopup(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        sideInventoryPopup.gameObject.SetActive(false);
+        sideInventoryPopupShown = true;
+        returnToMainMenuPopupShown = false;
     }
 
 }
