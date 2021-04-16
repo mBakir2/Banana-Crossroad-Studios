@@ -14,6 +14,7 @@ using System;
 public class GameController : MonoBehaviour
 {
     public GameObject pauseMenu;
+    public GameObject tutorialPauseMenu;
     public GameObject inventory;
     public GameObject completion;
     public GameObject uiRifle;
@@ -237,7 +238,13 @@ public class GameController : MonoBehaviour
 
     public void pauseGame()
     {
-        pauseMenu.SetActive(true);
+        if (GameData.loadTutorial)
+        {
+            tutorialPauseMenu.SetActive(true);
+        } else
+        {
+            pauseMenu.SetActive(true);
+        }
         Time.timeScale = 0f;
     }
 
@@ -461,6 +468,12 @@ public class GameController : MonoBehaviour
         sceneData.hasRifle = GameData.hasRifle;
         sceneData.gunActive = GameData.gunActive;
 
+        sceneData.winOnce = GameData.winOnce;
+        sceneData.loseOnce = GameData.loseOnce;
+        sceneData.killOnce = GameData.killOnce;
+        sceneData.cureOnce = GameData.cureOnce;
+        sceneData.winWithoutGun = GameData.winWithoutGun;
+
         saveGameDataInPlayerPrefs();
     }
 
@@ -492,6 +505,13 @@ public class GameController : MonoBehaviour
         PlayerPrefs.SetInt("hasPistol", (sceneData.hasPistol ? 1 : 0));
         PlayerPrefs.SetInt("hasRifle", (sceneData.hasRifle ? 1 : 0));
         PlayerPrefs.SetInt("gunActive", sceneData.gunActive);
+
+        // saving achievements
+        PlayerPrefs.SetInt("winOnce", (sceneData.winOnce ? 1 : 0));
+        PlayerPrefs.SetInt("loseOnce", (sceneData.loseOnce ? 1 : 0));
+        PlayerPrefs.SetInt("killOnce", (sceneData.killOnce ? 1 : 0));
+        PlayerPrefs.SetInt("cureOnce", (sceneData.cureOnce ? 1 : 0));
+        PlayerPrefs.SetInt("winWithoutGun", (sceneData.winWithoutGun ? 1 : 0));
 
         // making a new pickup items data class to enclose the pickup item lists
         PickupItemsData itemsData = new PickupItemsData
@@ -533,6 +553,13 @@ public class GameController : MonoBehaviour
         sceneData.hasPistol = (PlayerPrefs.GetInt("hasPistol") != 0);
         sceneData.hasRifle = (PlayerPrefs.GetInt("hasRifle") != 0);
         sceneData.gunActive = PlayerPrefs.GetInt("gunActive");
+
+        // load achievements
+        sceneData.winOnce = (PlayerPrefs.GetInt("winOnce") != 0);
+        sceneData.loseOnce = (PlayerPrefs.GetInt("loseOnce") != 0);
+        sceneData.killOnce = (PlayerPrefs.GetInt("killOnce") != 0);
+        sceneData.cureOnce = (PlayerPrefs.GetInt("cureOnce") != 0);
+        sceneData.winWithoutGun = (PlayerPrefs.GetInt("winWithoutGun") != 0);
 
         // parsing the data from JSON and assigning it to the scene data
         sceneData.darkSeekersSaveData = JsonUtility.FromJson<DarkSeekerSaveData>(PlayerPrefs.GetString("darkSeekersData"));
