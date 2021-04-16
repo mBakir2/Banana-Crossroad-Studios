@@ -63,6 +63,7 @@ public class MainMenuScript : MonoBehaviour
     }
     public void MainMenu()
     {
+        GameData.loadTutorial = false;
         SceneManager.LoadScene(0);
     }
     public void EndScreen()
